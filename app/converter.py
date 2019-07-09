@@ -313,7 +313,6 @@ class Application(Gtk.Application):
                 d_time = sum((int(d_res.group(2)) * 3600, int(d_res.group(3)) * 60, float(d_res.group(4))))
                 if duration:
                     self._duration = d_time
-                    print(self._duration)
                 elif self._duration > 0:
                     d_time = sum((int(d_res.group(2)) * 3600, int(d_res.group(3)) * 60, float(d_res.group(4))))
                     done = d_time * 100 / self._duration

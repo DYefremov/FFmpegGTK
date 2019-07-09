@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.22.1 
 
-Copyright (C) 2019 Dmitriy Yefremov  
+Copyright (C) 2019 Dmitriy Yefremov
 
 This file is part of FFmpegGTK.
 
-VSFConverter is free software: you can redistribute it and/or modify
+FFmpegGTK is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-VSFConverter is distributed in the hope that it will be useful,
+FFmpegGTK is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with VSFConverter.  If not, see <http://www.gnu.org/licenses/>.
+along with FFmpegGTK.  If not, see <http://www.gnu.org/licenses/>.
 
 Author: Dmitriy Yefremov
 
@@ -261,7 +261,7 @@ Author: Dmitriy Yefremov
       </object>
     </child>
   </object>
-  <object class="GtkPopover" id="options_popover">
+  <object class="GtkPopoverMenu" id="options_popover_menu">
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="main_popover_box">
@@ -549,6 +549,9 @@ Author: Dmitriy Yefremov
           </packing>
         </child>
       </object>
+      <packing>
+        <property name="submenu">main</property>
+      </packing>
     </child>
   </object>
   <object class="GtkApplicationWindow" id="main_window">
@@ -596,8 +599,8 @@ Author: Dmitriy Yefremov
                 <property name="stock">gtk-add</property>
               </object>
             </child>
-            <accelerator key="i" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
             <accelerator key="Insert" signal="clicked"/>
+            <accelerator key="i" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
           </object>
           <packing>
             <property name="position">1</property>
@@ -663,7 +666,7 @@ Author: Dmitriy Yefremov
             <property name="receives_default">True</property>
             <property name="tooltip_text" translatable="yes">Options</property>
             <property name="direction">none</property>
-            <property name="popover">options_popover</property>
+            <property name="popover">options_popover_menu</property>
             <child>
               <placeholder/>
             </child>
