@@ -27,8 +27,10 @@ def convert_presets_xml_to_json(xml_path, json_path):
                                 preset[ch.nodeName] = ch.childNodes[0].data
                     presets.append(preset)
 
-        out = defaultdict(list)
-        list(map(lambda p: out[p["category"]].append(p), presets))
+        out = defaultdict(dict)
+        list(
+            map(lambda p: out[p["category"]].update({p["label"]: {"params": p["params"], "extension": p["extension"]}}),
+                presets))
 
         with open(json_path, "w") as config_file:
             json.dump(out, config_file, indent=2)
@@ -36,4 +38,3 @@ def convert_presets_xml_to_json(xml_path, json_path):
 
 if __name__ == "__main__":
     pass
-

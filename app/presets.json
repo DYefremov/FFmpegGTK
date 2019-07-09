@@ -1,740 +1,510 @@
 {
-  "Blackberry": [
-    {
-      "label": "Blackberry Curve Fullscreen",
+  "Blackberry": {
+    "Blackberry Curve Fullscreen": {
       "params": "-f mp4 -vcodec mpeg4 -b:v 400k -r 24 -vf scale=320:240 -aspect 4:3 -acodec aac -ar 22050 -ac 2 -b:a 48k",
-      "extension": "mp4",
-      "category": "Blackberry"
+      "extension": "mp4"
     },
-    {
-      "label": "Blackberry Curve Widescreen",
+    "Blackberry Curve Widescreen": {
       "params": "-f mp4 -vcodec mpeg4 -b:v 400k -r 24 -vf scale=320:180 -aspect 16:9 -acodec aac -ar 22050 -ac 2 -b:a 48k",
-      "extension": "mp4",
-      "category": "Blackberry"
+      "extension": "mp4"
     },
-    {
-      "label": "Blackberry Video Fullscreen",
+    "Blackberry Video Fullscreen": {
       "params": "-f mp4 -r 24 -vcodec libx264 -preset medium -vf scale=240:180 -aspect 4:3 -maxrate 800k -bufsize 80k -b:v 400k -acodec aac -ar 44100 -b:a 80k -ac 2",
-      "extension": "mp4",
-      "category": "Blackberry"
+      "extension": "mp4"
     },
-    {
-      "label": "Blackberry Music",
+    "Blackberry Music": {
       "params": "-acodec libmp3lame -b:a 160k -ac 2 -ar 44100",
-      "extension": "mp3",
-      "category": "Blackberry"
+      "extension": "mp3"
     },
-    {
-      "label": "Blackberry Video Widescreen",
+    "Blackberry Video Widescreen": {
       "params": "-f mp4 -r 24 -vcodec libx264 -preset medium -vf scale=320:180 -aspect 16:9 -maxrate 800k -bufsize 80k -b:v 400k -acodec aac -ar 44100 -b:a 80k -ac 2",
-      "extension": "mp4",
-      "category": "Blackberry"
+      "extension": "mp4"
     }
-  ],
-  "Audio": [
-    {
-      "label": "Wav for CD",
+  },
+  "Audio": {
+    "Wav for CD": {
       "params": "-vn -ar 44100",
-      "extension": "wav",
-      "category": "Audio"
+      "extension": "wav"
     },
-    {
-      "label": "MPEG4 Audio",
+    "MPEG4 Audio": {
       "params": "-vn -acodec aac -b:a 112k -ac 2 -ar 48000",
-      "extension": "m4a",
-      "category": "Audio"
+      "extension": "m4a"
     },
-    {
-      "label": "Ac3 DVD - 192kbps Stereo",
+    "Ac3 DVD - 192kbps Stereo": {
       "params": "-f ac3 -acodec ac3 -b:a 192k -ar 48000 -ac 2",
-      "extension": "ac3",
-      "category": "Audio"
+      "extension": "ac3"
     },
-    {
-      "label": "Ac3 DVD - 384kbps Stereo",
+    "Ac3 DVD - 384kbps Stereo": {
       "params": "-f ac3 -acodec ac3 -b:a 384k -ar 48000 -ac 2",
-      "extension": "ac3",
-      "category": "Audio"
+      "extension": "ac3"
     },
-    {
-      "label": "MP3",
+    "MP3": {
       "params": "-acodec libmp3lame -b:a 160k -ac 2 -ar 44100",
-      "extension": "mp3",
-      "category": "Audio"
+      "extension": "mp3"
     },
-    {
-      "label": "OGG",
+    "OGG": {
       "params": "-acodec libvorbis -aq 3 -vn -ac 2",
-      "extension": "ogg",
-      "category": "Audio"
+      "extension": "ogg"
     },
-    {
-      "label": "WMA",
+    "WMA": {
       "params": "-vn -acodec wmav2 -b:a 160k -ac 2",
-      "extension": "wma",
-      "category": "Audio"
+      "extension": "wma"
     }
-  ],
-  "Rockbox": [
-    {
-      "label": "RB Toshiba Gigabeat F/X Fullscreen",
+  },
+  "Rockbox": {
+    "RB Toshiba Gigabeat F/X Fullscreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=320:240 -b:v 600k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Toshiba Gigabeat F/X Widescreen",
+    "RB Toshiba Gigabeat F/X Widescreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=320:176 -b:v 600k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB iRiver H10 20GB Fullscreen",
+    "RB iRiver H10 20GB Fullscreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=160:128 -b:v 224k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB iRiver H10 20GB Widescreen",
+    "RB iRiver H10 20GB Widescreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=160:96 -b:v 224k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB iRiver H10 5/6GB Fullscreen",
+    "RB iRiver H10 5/6GB Fullscreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=128:96 -b:v 224k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB iRiver H10 5/6GB Widescreen",
+    "RB iRiver H10 5/6GB Widescreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=128:80 -b:v 224k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB iRiver H300 Fullscreen",
+    "RB iRiver H300 Fullscreen": {
       "params": "-acodec libmp3lame -b:a 96k -ar 44100 -vcodec mpeg2video -vf scale=224:176 -b:v 224k -r 10 -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB iRiver H300 Widescreen",
+    "RB iRiver H300 Widescreen": {
       "params": "-acodec libmp3lame -b:a 96k -ar 44100 -vcodec mpeg2video -vf scale=224:128 -b:v 256k -r 15 -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Apple iPod Video Fullscreen",
+    "RB Apple iPod Video Fullscreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=320:240 -b:v 400k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Apple iPod Video Widescreen",
+    "RB Apple iPod Video Widescreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=320:176 -b:v 400k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Apple iPod Photo/Color Fullscreen",
+    "RB Apple iPod Photo/Color Fullscreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=224:176 -b:v 320k -r 15 -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Apple iPod Photo/Color Widescreen",
+    "RB Apple iPod Photo/Color Widescreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=224:128 -b:v 320k -r 24 -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Cowon iAudio X5 Fullscreen",
+    "RB Cowon iAudio X5 Fullscreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=160:128 -b:v 176k -r 15 -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Cowon iAudio X5 Widescreen",
+    "RB Cowon iAudio X5 Widescreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=160:96 -b:v 224k -r 24 -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Sandisk Sansa e200 Fullscreen",
+    "RB Sandisk Sansa e200 Fullscreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=224:176 -b:v 320k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Sandisk Sansa e200 Widescreen",
+    "RB Sandisk Sansa e200 Widescreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=224:128 -b:v 320k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Apple iPod Nano Fullscreen",
+    "RB Apple iPod Nano Fullscreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=176:128 -b:v 256k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     },
-    {
-      "label": "RB Apple iPod Nano Widescreen",
+    "RB Apple iPod Nano Widescreen": {
       "params": "-acodec libmp3lame -b:a 128k -ar 44100 -vcodec mpeg2video -vf scale=176:128 -b:v 256k -strict -1",
-      "extension": "mpg",
-      "category": "Rockbox"
+      "extension": "mpg"
     }
-  ],
-  "Mobile Phones": [
-    {
-      "label": "3GPP H.263 128x96 4:3 AAC mono",
+  },
+  "Mobile Phones": {
+    "3GPP H.263 128x96 4:3 AAC mono": {
       "params": "-r 15 -b:v 64k -ac 1 -vf scale=128:96 -ar 16000 -b:a 32k -acodec aac -vcodec h263",
-      "extension": "3gp",
-      "category": "Mobile Phones"
+      "extension": "3gp"
     },
-    {
-      "label": "3GPP H.263 176x144 16:9 crop AAC mono",
+    "3GPP H.263 176x144 16:9 crop AAC mono": {
       "params": "-r 15 -b:v 64k -ac 1 -vf scale=256:144,crop=iw-2*40 -ar 16000 -b:a 32k -acodec aac -vcodec h263",
-      "extension": "3gp",
-      "category": "Mobile Phones"
+      "extension": "3gp"
     },
-    {
-      "label": "3GPP H.263 176x144 16:9 letterbox AAC mono",
+    "3GPP H.263 176x144 16:9 letterbox AAC mono": {
       "params": "-r 15 -b:v 64k -ac 1 -vf scale=176:100,pad=iw:ih+2*22:0:22 -ar 16000 -b:a 32k -acodec aac -vcodec h263",
-      "extension": "3gp",
-      "category": "Mobile Phones"
+      "extension": "3gp"
     },
-    {
-      "label": "3GPP H.263 176x144 4:3 AAC mono",
+    "3GPP H.263 176x144 4:3 AAC mono": {
       "params": "-r 15 -b:v 64k -ac 1 -vf scale=176:132,pad=iw:ih+2*6:0:6 -ar 16000 -b:a 32k -acodec aac -vcodec h263",
-      "extension": "3gp",
-      "category": "Mobile Phones"
+      "extension": "3gp"
     },
-    {
-      "label": "3GPP H.264 320x240 16:9 crop AAC stereo",
+    "3GPP H.264 320x240 16:9 crop AAC stereo": {
       "params": "-r 15 -b:v 128k -vf scale=426:240,crop=iw-52-54:ih:52 -ar 22050 -b:a 64k -acodec aac -vcodec libx264 -preset medium -coder 1 -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method hex -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1 -threads 0",
-      "extension": "3gp",
-      "category": "Mobile Phones"
+      "extension": "3gp"
     },
-    {
-      "label": "3GPP H.264 320x240 16:9 letterbox AAC stereo",
+    "3GPP H.264 320x240 16:9 letterbox AAC stereo": {
       "params": "-r 15 -b:v 128k -vf scale=320:180,pad=iw:ih+2*30:0:30 -ar 22050 -b:a 64k -acodec aac -vcodec libx264 -preset medium -coder 1 -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method hex -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1 -threads 0",
-      "extension": "3gp",
-      "category": "Mobile Phones"
+      "extension": "3gp"
     },
-    {
-      "label": "3GPP H.264 320x240 4:3 AAC stereo",
+    "3GPP H.264 320x240 4:3 AAC stereo": {
       "params": "-r 15 -b:v 128k -vf scale=320:240 -ar 22050 -b:a 64k -acodec aac -vcodec libx264 -preset medium -coder 1 -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method hex -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1 -threads 0",
-      "extension": "3gp",
-      "category": "Mobile Phones"
+      "extension": "3gp"
     },
-    {
-      "label": "CDMA Phone Audio (3g2)",
+    "CDMA Phone Audio (3g2)": {
       "params": "-f 3g2 -ar 22050 -b:a 128k -acodec aac -vf scale=176:144 -r 14.985 -vn",
-      "extension": "3g2",
-      "category": "Mobile Phones"
+      "extension": "3g2"
     },
-    {
-      "label": "MP3 (Mono)",
+    "MP3 (Mono)": {
       "params": "-acodec libmp3lame -b:a 32k -ac 1 -ar 22050",
-      "extension": "mp3",
-      "category": "Mobile Phones"
+      "extension": "mp3"
     }
-  ],
-  "MPEG-4": [
-    {
-      "label": "MPEG-4 720p",
+  },
+  "MPEG-4": {
+    "MPEG-4 720p": {
       "params": "-crf 20.0 -vcodec libx264 -vf scale=1280:720 -preset slow -acodec aac -ar 48000 -b:a 128k -coder 1 -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method hex -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1 -threads 0",
-      "extension": "mp4",
-      "category": "MPEG-4"
+      "extension": "mp4"
     },
-    {
-      "label": "MPEG-4 1080p",
+    "MPEG-4 1080p": {
       "params": "-crf 18.0 -vcodec libx264 -vf scale=1920:1080 -preset veryslow -acodec aac -ar 48000 -b:a 192k -coder 1 -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method hex -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1 -threads 0",
-      "extension": "mp4",
-      "category": "MPEG-4"
+      "extension": "mp4"
     },
-    {
-      "label": "MP4 Fullscreen",
+    "MP4 Fullscreen": {
       "params": "-f mp4 -r 29.97 -vcodec libx264 -preset slow -vf scale=640:480 -b:v 1000k -aspect 4:3 -flags +loop -cmp chroma -b:v 1250k -maxrate 1500k -bufsize 4M -bt 256k -refs 1 -bf 3 -coder 1 -me_method umh -me_range 16 -subq 7 -partitions +parti4x4+parti8x8+partp8x8+partb8x8 -g 250 -keyint_min 25 -level 30 -qmin 10 -qmax 51 -qcomp 0.6 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "mp4",
-      "category": "MPEG-4"
+      "extension": "mp4"
     },
-    {
-      "label": "MP4 Widescreen",
+    "MP4 Widescreen": {
       "params": "-f mp4 -r 29.97 -vcodec libx264 -preset slow -vf scale=704:384 -b:v 1000k -aspect 16:9 -flags +loop -cmp chroma -b:v 1250k -maxrate 1500k -bufsize 4M -bt 256k -refs 1 -bf 3 -coder 1 -me_method umh -me_range 16 -subq 7 -partitions +parti4x4+parti8x8+partp8x8+partb8x8 -g 250 -keyint_min 25 -level 30 -qmin 10 -qmax 51 -qcomp 0.6 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "mp4",
-      "category": "MPEG-4"
+      "extension": "mp4"
     }
-  ],
-  "Nokia": [
-    {
-      "label": "Nokia N810 mplayer 4:3",
+  },
+  "Nokia": {
+    "Nokia N810 mplayer 4:3": {
       "params": "-r 29.97 -vcodec libxvid -vtag XVID -vf scale=400:240 -aspect 4:3 -maxrate 1200k -b:v 1200k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -bf 2 -cmp 2 -subcmp 2 -g 300 -acodec libmp3lame -ar 44100 -b:a 160k -ac 2 -filter:a asyncts=first_pts=0",
-      "extension": "avi",
-      "category": "Nokia"
+      "extension": "avi"
     },
-    {
-      "label": "Nokia N810 mplayer 16:9",
+    "Nokia N810 mplayer 16:9": {
       "params": "-r 29.97 -vcodec libxvid -vtag XVID -vf scale=400:240 -aspect 16:9 -maxrate 1200k -b:v 1200k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -bf 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec libmp3lame -ar 44100 -b:a 160k -ac 2 -filter:a asyncts=first_pts=0",
-      "extension": "avi",
-      "category": "Nokia"
+      "extension": "avi"
     },
-    {
-      "label": "Nokia N810 mplayer CinemaScope 24:10",
+    "Nokia N810 mplayer CinemaScope 24:10": {
       "params": "-r 29.97 -vcodec libxvid -vtag XVID -vf scale=400:240 -aspect 24:10 -maxrate 1200k -b:v 1200k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -bf 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec libmp3lame -ar 44100 -b:a 160k -ac 2 -filter:a asyncts=first_pts=0",
-      "extension": "avi",
-      "category": "Nokia"
+      "extension": "avi"
     },
-    {
-      "label": "Nokia Nxx Video FullScreen",
+    "Nokia Nxx Video FullScreen": {
       "params": "-f mp4 -r 15 -vcodec mpeg4 -vf scale=320:240 -b:v 320k -aspect 4:3 -acodec aac -b:a 96k -ar 44100 -ac 2",
-      "extension": "mp4",
-      "category": "Nokia"
+      "extension": "mp4"
     },
-    {
-      "label": "Nokia Nxx Video WideScreen",
+    "Nokia Nxx Video WideScreen": {
       "params": "-f mp4 -r 15 -vcodec mpeg4 -vf scale=320:240 -b:v 320k -aspect 16:9 -acodec aac -b:a 96k -ar 44100 -ac 2",
-      "extension": "mp4",
-      "category": "Nokia"
+      "extension": "mp4"
     }
-  ],
-  "Neuros OSD": [
-    {
-      "label": "Neuros HQ NTSC Fullscreen",
+  },
+  "Neuros OSD": {
+    "Neuros HQ NTSC Fullscreen": {
       "params": "-f mp4 -r 29.97 -vcodec libxvid -vf scale=640:480 -aspect 4:3 -maxrate 2500k -b:v 2000k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec aac -ar 48000 -b:a 128k -ac 2",
-      "extension": "mp4",
-      "category": "Neuros OSD"
+      "extension": "mp4"
     },
-    {
-      "label": "Neuros HQ PAL Fullscreen",
+    "Neuros HQ PAL Fullscreen": {
       "params": "-f mp4 -r 25 -vcodec libxvid -vf scale=640:480 -aspect 4:3 -maxrate 2500k -b:v 2000k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec aac -ar 48000 -b:a 128k -ac 2",
-      "extension": "mp4",
-      "category": "Neuros OSD"
+      "extension": "mp4"
     },
-    {
-      "label": "Neuros Small File NTSC Fullscreen",
+    "Neuros Small File NTSC Fullscreen": {
       "params": "-f mp4 -b:v 800k -r 29.97 -vf scale=320:240 -aspect 4:3 -vcodec libxvid -ar 48000 -b:a 80k -ac 2 -acodec aac",
-      "extension": "mp4",
-      "category": "Neuros OSD"
+      "extension": "mp4"
     },
-    {
-      "label": "Neuros Small File PAL Fullscreen",
+    "Neuros Small File PAL Fullscreen": {
       "params": "-f mp4 -b:v 800k -r 25 -vf scale=320:240 -aspect 4:3 -vcodec libxvid -ar 48000 -b:a 80k -ac 2 -acodec aac",
-      "extension": "mp4",
-      "category": "Neuros OSD"
+      "extension": "mp4"
     },
-    {
-      "label": "Neuros HQ NTSC Widescreen",
+    "Neuros HQ NTSC Widescreen": {
       "params": "-f mp4 -r 29.97 -vcodec libxvid -vf scale=704:384 -aspect 16:9 -maxrate 3000k -b:v 2500k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -bf 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec aac -ar 48000 -b:a 128k -ac 2",
-      "extension": "mp4",
-      "category": "Neuros OSD"
+      "extension": "mp4"
     },
-    {
-      "label": "Neuros HQ PAL Widescreen",
+    "Neuros HQ PAL Widescreen": {
       "params": "-f mp4 -r 25 -vcodec libxvid -vf scale=704:384 -aspect 16:9 -maxrate 3000k -b:v 2500k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -bf 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec aac -ar 48000 -b:a 128k -ac 2",
-      "extension": "mp4",
-      "category": "Neuros OSD"
+      "extension": "mp4"
     },
-    {
-      "label": "Neuros Small File NTSC Widescreen",
+    "Neuros Small File NTSC Widescreen": {
       "params": "-f mp4 -b:v 800k -r 29.97 -vf scale=352:240 -aspect 16:9 -vcodec libxvid -ar 48000 -b:a 80k -ac 2 -acodec aac",
-      "extension": "mp4",
-      "category": "Neuros OSD"
+      "extension": "mp4"
     },
-    {
-      "label": "Neuros Small File PAL Widescreen",
+    "Neuros Small File PAL Widescreen": {
       "params": "-f mp4 -b:v 800k -r 25 -vf scale=352:240 -aspect 16:9 -vcodec libxvid -ar 48000 -b:a 80k -ac 2 -acodec aac",
-      "extension": "mp4",
-      "category": "Neuros OSD"
+      "extension": "mp4"
     }
-  ],
-  "Palm": [
-    {
-      "label": "Palm Fullscreen",
+  },
+  "Palm": {
+    "Palm Fullscreen": {
       "params": "-f mp4 -r 29.97 -vcodec libxvid -vf scale=428:320 -aspect 4:3 -maxrate 550k -b:v 500k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec aac -ar 44100 -b:a 80k -ac 2",
-      "extension": "mp4",
-      "category": "Palm"
+      "extension": "mp4"
     },
-    {
-      "label": "Palm Widescreen",
+    "Palm Widescreen": {
       "params": "-f mp4 -r 29.97 -vcodec libxvid -vf scale=480:320 -aspect 3:2 -maxrate 450k -b:v 430k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec aac -ar 44100 -b:a 80k -ac 2",
-      "extension": "mp4",
-      "category": "Palm"
+      "extension": "mp4"
     }
-  ],
-  "AVI": [
-    {
-      "label": "XviD FullScreen",
+  },
+  "AVI": {
+    "XviD FullScreen": {
       "params": "-f avi -r 29.97 -vcodec libxvid -vtag XVID -vf scale=640:480 -aspect 4:3 -maxrate 1800k -b:v 1500k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -bf 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec libmp3lame -ar 48000 -b:a 128k -ac 2",
-      "extension": "avi",
-      "category": "AVI"
+      "extension": "avi"
     },
-    {
-      "label": "XviD Widescreen",
+    "XviD Widescreen": {
       "params": "-f avi -r 29.97 -vcodec libxvid -vtag XVID -vf scale=704:384 -aspect 16:9 -maxrate 1800k -b:v 1500k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -bf 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec libmp3lame -ar 48000 -b:a 128k -ac 2",
-      "extension": "avi",
-      "category": "AVI"
+      "extension": "avi"
     },
-    {
-      "label": "XviD Widescreen Anamorphic",
+    "XviD Widescreen Anamorphic": {
       "params": "-f avi -r 29.97 -vf crop=iw:ih-58-62:0:58,scale=640:272 -vcodec libxvid -vtag XVID -aspect 2.35 -maxrate 1800k -b:v 1500k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -bf 2 -trellis 1 -flags +aic -cmp 2 -subcmp 2 -g 300 -acodec libmp3lame -ar 48000 -b:a 128k -ac 2",
-      "extension": "avi",
-      "category": "AVI"
+      "extension": "avi"
     },
-    {
-      "label": "MS Compatible AVI",
+    "MS Compatible AVI": {
       "params": "-acodec libmp3lame -vcodec msmpeg4 -b:a 192k -b:v 1000k -vf scale=640:480 -ar 44100",
-      "extension": "avi",
-      "category": "AVI"
+      "extension": "avi"
     }
-  ],
-  "Creative Zen": [
-    {
-      "label": "Zen Fullscreen",
+  },
+  "Creative Zen": {
+    "Zen Fullscreen": {
       "params": "-f avi -r 29.97 -vcodec libxvid -vtag XVID -vf scale=320:240 -aspect 4:3 -maxrate 1800k -b:v 1500k -acodec libmp3lame -ar 48000 -b:a 128k -ac 2",
-      "extension": "avi",
-      "category": "Creative Zen"
+      "extension": "avi"
     },
-    {
-      "label": "Zen Widescreen",
+    "Zen Widescreen": {
       "params": "-f avi -r 29.97 -vcodec libxvid -vtag XVID -vf scale=320:240 -aspect 16:9 -maxrate 1800k -b:v 1500k -acodec libmp3lame -ar 48000 -b:a 128k -ac 2",
-      "extension": "avi",
-      "category": "Creative Zen"
+      "extension": "avi"
     }
-  ],
-  "Google Android": [
-    {
-      "label": "Google Android compatible video",
+  },
+  "Google Android": {
+    "Google Android compatible video": {
       "params": "-vf scale=480:320 -vcodec mpeg4 -acodec aac -ac 1 -ar 16000 -r 13 -b:a 32000 -aspect 3:2",
-      "extension": "mp4",
-      "category": "Google Android"
+      "extension": "mp4"
     },
-    {
-      "label": "Google Android compatible video. Video bitrate: 480 kb/s",
+    "Google Android compatible video. Video bitrate: 480 kb/s": {
       "params": "-vf scale=480:320 -vcodec mpeg4 -b:v 480k -acodec aac -ac 1 -ar 16000 -r 13 -b:a 32000 -aspect 3:2",
-      "extension": "mp4",
-      "category": "Google Android"
+      "extension": "mp4"
     },
-    {
-      "label": "Google Android video. VHQ 16:9 widescreen",
+    "Google Android video. VHQ 16:9 widescreen": {
       "params": "-vf scale=480:272 -vcodec libx264 -preset medium -b:v 500k -threads 0 -acodec aac -ar 44100 -b:a 96k",
-      "extension": "mp4",
-      "category": "Google Android"
+      "extension": "mp4"
     },
-    {
-      "label": "Google Android video. VHQ 4:3 fullscreen",
+    "Google Android video. VHQ 4:3 fullscreen": {
       "params": "-vf scale=432:320 -vcodec libx264 -preset medium -b:v 500k -threads 0 -acodec aac -ar 44100 -b:a 96k",
-      "extension": "mp4",
-      "category": "Google Android"
+      "extension": "mp4"
     }
-  ],
-  "DV": [
-    {
-      "label": "Raw DV for NTSC Fullscreen",
+  },
+  "DV": {
+    "Raw DV for NTSC Fullscreen": {
       "params": "-target ntsc-dv -aspect 4:3 -f dv",
-      "extension": "dv",
-      "category": "DV"
+      "extension": "dv"
     },
-    {
-      "label": "Raw DV for PAL Fullscreen",
+    "Raw DV for PAL Fullscreen": {
       "params": "-target pal-dv -aspect 4:3 -f dv",
-      "extension": "dv",
-      "category": "DV"
+      "extension": "dv"
     }
-  ],
-  "Websites": [
-    {
-      "label": "Flash Video (flv) for Web use Fullscreen",
+  },
+  "Websites": {
+    "Flash Video (flv) for Web use Fullscreen": {
       "params": "-vcodec flv -f flv -r 29.97 -vf scale=320:240 -aspect 4:3 -b:v 300k -g 160 -cmp dct  -subcmp dct  -mbd 2 -flags +aic+cbp+mv0+mv4 -trellis 1 -ac 1 -ar 22050 -b:a 56k",
-      "extension": "flv",
-      "category": "Websites"
+      "extension": "flv"
     },
-    {
-      "label": "Flash: Video (flv) for Web use Widescreen",
+    "Flash: Video (flv) for Web use Widescreen": {
       "params": "-vcodec flv -f flv -r 29.97 -vf scale=320:180 -aspect 16:9 -b:v 300k -g 160 -cmp dct -subcmp dct -mbd 2 -flags +aic+cbp+mv0+mv4 -trellis 1 -ac 1 -ar 22050 -b:a 56k",
-      "extension": "flv",
-      "category": "Websites"
+      "extension": "flv"
     }
-  ],
-  "Google": [
-    {
-      "label": "Google WebM for Andriod 2.3.3+",
+  },
+  "Google": {
+    "Google WebM for Andriod 2.3.3+": {
       "params": "-f webm -aspect 3:2 -vcodec libvpx -vf scale=480:320 -r 13 -g 120 -level 216 -profile:v 0 -qmax 42 -qmin 10 -rc_buf_aggressivity 0.95 -vb 480k -acodec libvorbis -b:a 96000 -aq 90 -ac 2",
-      "extension": "webm",
-      "category": "Google"
+      "extension": "webm"
     },
-    {
-      "label": "Google WebM for Andriod 2.3.3+ Fullscreen",
+    "Google WebM for Andriod 2.3.3+ Fullscreen": {
       "params": "-f webm -aspect 4:3 -vcodec libvpx -vf scale=432:320 -r 13 -g 120 -level 216 -profile:v 0 -qmax 42 -qmin 10 -rc_buf_aggressivity 0.95 -vb 480k -acodec libvorbis -b:a 96k -aq 90 -ac 2",
-      "extension": "webm",
-      "category": "Google"
+      "extension": "webm"
     },
-    {
-      "label": "Google WebM for Andriod 2.3.3+ Widescreen",
+    "Google WebM for Andriod 2.3.3+ Widescreen": {
       "params": "-f webm -aspect 16:9 -vcodec libvpx -vf scale=480:272 -r 13 -g 120 -level 216 -profile:v 0 -qmax 42 -qmin 10 -rc_buf_aggressivity 0.95 -vb 480k -acodec libvorbis -b:a 96k -aq 90 -ac 2",
-      "extension": "webm",
-      "category": "Google"
+      "extension": "webm"
     },
-    {
-      "label": "Google WebM Generic Fullscreen",
+    "Google WebM Generic Fullscreen": {
       "params": "-f webm -aspect 4:3 -vcodec libvpx -g 120 -level 216 -profile:v 0 -qmax 42 -qmin 10 -rc_buf_aggressivity 0.95 -vb 2M -acodec libvorbis -aq 90 -ac 2",
-      "extension": "webm",
-      "category": "Google"
+      "extension": "webm"
     },
-    {
-      "label": "Google WebM Generic Widescreen",
+    "Google WebM Generic Widescreen": {
       "params": "-f webm -aspect 16:9 -vcodec libvpx -g 120 -level 216 -profile:v 0 -qmax 42 -qmin 10 -rc_buf_aggressivity 0.95 -vb 2M -acodec libvorbis -aq 90 -ac 2",
-      "extension": "webm",
-      "category": "Google"
+      "extension": "webm"
     }
-  ],
-  "iPod-iTunes": [
-    {
-      "label": "iPhone WideScreen",
+  },
+  "iPod-iTunes": {
+    "iPhone WideScreen": {
       "params": "-r 29.97 -vcodec libx264 -preset fast -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -vf scale=480:320 -aspect 16:9 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     },
-    {
-      "label": "iPod Small Fullscreen",
+    "iPod Small Fullscreen": {
       "params": "-r 29.97 -vcodec libx264 -preset medium -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -vf scale=320:240 -aspect 4:3 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     },
-    {
-      "label": "iPod Small WideScreen",
+    "iPod Small WideScreen": {
       "params": "-r 29.97 -vcodec libx264 -preset medium -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -vf scale=320:176 -aspect 16:9 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     },
-    {
-      "label": "iPod Small WideScreen Anamorphic",
+    "iPod Small WideScreen Anamorphic": {
       "params": "-r 29.97 -vf crop=iw:ih-2*60,scale=320:144 -vcodec libx264 -preset medium -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -aspect 2.35 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     },
-    {
-      "label": "iPod Small Converted to WideScreen",
+    "iPod Small Converted to WideScreen": {
       "params": "-r 29.97 -vf crop=iw:ih-2*64,scale=320:176 -vcodec libx264 -preset medium -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -aspect 16:9 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     },
-    {
-      "label": "iPod TV Out Fullscreen",
+    "iPod TV Out Fullscreen": {
       "params": "-r 29.97 -vcodec libx264 -preset medium -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -vf scale=512:384 -aspect 4:3 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     },
-    {
-      "label": "iPod TV Out Widescreen",
+    "iPod TV Out Widescreen": {
       "params": "-r 29.97 -vcodec libx264 -preset medium -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -vf scale=624:352 -aspect 16:9 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     },
-    {
-      "label": "iPod TV Out Widescreen Anamorphic",
+    "iPod TV Out Widescreen Anamorphic": {
       "params": "-r 29.97 -vf crop=iw:ih-2*60,scale=640:272 -vcodec libx264 -preset medium -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -aspect 2.35 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     },
-    {
-      "label": "iPod TV Out Converted to Widescreen",
+    "iPod TV Out Converted to Widescreen": {
       "params": "-r 29.97 -vf crop=iw:ih-2*64,scale=640:352 -vcodec libx264 -preset medium -flags +loop -cmp chroma -crf 21 -bt 256k -refs 1 -coder 0 -me_method full -me_range 16 -subq 5 -partitions +parti4x4+parti8x8+partp8x8 -g 250 -keyint_min 25 -level 30 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -aspect 16:9 -acodec aac -b:a 112k -ar 48000 -ac 2",
-      "extension": "m4v",
-      "category": "iPod-iTunes"
+      "extension": "m4v"
     }
-  ],
-  "LG": [
-    {
-      "label": "LG Chocolate",
+  },
+  "LG": {
+    "LG Chocolate": {
       "params": "-f mp4 -vf scale=240:192 -aspect 240:192 -r 11.988 -b:v 192k -b:a 56k -vcodec libxvid -acodec aac -ar 22050",
-      "extension": "mp4",
-      "category": "LG"
+      "extension": "mp4"
     },
-    {
-      "label": "LG Dare",
+    "LG Dare": {
       "params": "-f mp4 -vf scale=320:240 -aspect 320:240 -r 11.988 -b:v 160k -b:a 56k -vcodec libxvid -acodec aac -ar 22050",
-      "extension": "mp4",
-      "category": "LG"
+      "extension": "mp4"
     }
-  ],
-  "DVD": [
-    {
-      "label": "NTSC DVD Fullscreen",
+  },
+  "DVD": {
+    "NTSC DVD Fullscreen": {
       "params": "-f dvd -vcodec mpeg2video -r 30000/1001 -vf scale=352:480 -aspect 4:3 -b:v 4000k -mbd rd -trellis 1 -flags +mv0 -cmp 2 -subcmp 2 -acodec mp2 -b:a 192k -ar 48000 -ac 2",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "NTSC DVD Widescreen",
+    "NTSC DVD Widescreen": {
       "params": "-f dvd -vcodec mpeg2video -r 30000/1001 -vf scale=352:480 -aspect 16:9 -b:v 4000k -mbd rd -trellis 1 -flags +mv0 -cmp 2 -subcmp 2 -acodec mp2 -b:a 192k -ar 48000 -ac 2",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "NTSC DVD HQ Fullscreen",
+    "NTSC DVD HQ Fullscreen": {
       "params": "-f dvd -target ntsc-dvd -r 30000/1001 -vf scale=720:480 -aspect 4:3 -vb 8000k -mbd rd -trellis 1 -flags +mv0 -cmp 0 -subcmp 2",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "NTSC DVD HQ Widescreen",
+    "NTSC DVD HQ Widescreen": {
       "params": "-f dvd -target ntsc-dvd -r 30000/1001 -vf scale=720:480 -aspect 16:9 -vb 8000k -g 12 -mbd rd -trellis 1 -flags +mv0 -cmp 0 -subcmp 2",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "NTSC DVD Fast (LQ)",
+    "NTSC DVD Fast (LQ)": {
       "params": "-f dvd -target ntsc-dvd -b:v 5000k -r 30000/1001 -vf scale=720:480 -ar 48000 -b:a 384k",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "PAL DVD Fullscreen",
+    "PAL DVD Fullscreen": {
       "params": "-f dvd -vcodec mpeg2video -r 25.00 -vf scale=352:576 -aspect 4:3 -b:v 4000k -mbd rd -trellis 1 -flags +mv0 -cmp 2 -subcmp 2 -acodec mp2 -b:a 192k -ar 48000 -ac 2",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "PAL DVD Widescreen",
+    "PAL DVD Widescreen": {
       "params": "-f dvd -vcodec mpeg2video -r 25.00 -vf scale=352:576 -aspect 16:9 -b:v 4000k -mbd rd -trellis 1 -flags +mv0 -cmp 2 -subcmp 2 -acodec mp2 -b:a 192k -ar 48000 -ac 2",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "PAL DVD HQ Fullscreen",
+    "PAL DVD HQ Fullscreen": {
       "params": "-f dvd -target pal-dvd -aspect 4:3 -vb 8000k -mbd rd -trellis 1 -flags +mv0 -cmp 0 -subcmp 2",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "PAL DVD HQ Widescreen",
+    "PAL DVD HQ Widescreen": {
       "params": "-f dvd -target pal-dvd -aspect 16:9 -vb 8000k -mbd rd -trellis 1 -flags +mv0 -cmp 0 -subcmp 2",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     },
-    {
-      "label": "PAL DVD Fast (LQ)",
+    "PAL DVD Fast (LQ)": {
       "params": "-f dvd -target pal-dvd -b:v 5000k -r 25 -vf scale=720:576 -ar 48000 -b:a 384k",
-      "extension": "mpg",
-      "category": "DVD"
+      "extension": "mpg"
     }
-  ],
-  "VCD": [
-    {
-      "label": "NTSC VCD (HQ)",
+  },
+  "VCD": {
+    "NTSC VCD (HQ)": {
       "params": "-f vcd -target ntsc-vcd -mbd rd -trellis 1 -flags +mv0 -cmp 0 -subcmp 2",
-      "extension": "mpg",
-      "category": "VCD"
+      "extension": "mpg"
     },
-    {
-      "label": "PAL VCD (HQ)",
+    "PAL VCD (HQ)": {
       "params": "-f vcd -target pal-vcd -mbd rd -trellis 1 -flags +mv0 -cmp 0 -subcmp 2",
-      "extension": "mpg",
-      "category": "VCD"
+      "extension": "mpg"
     }
-  ],
-  "PS3": [
-    {
-      "label": "PS3 720p Widescreen",
+  },
+  "PS3": {
+    "PS3 720p Widescreen": {
       "params": "-f mp4 -r 23.976 -vcodec libx264 -preset slow -vf scale=1280:720 -b:v 3000k -aspect 16:9 -flags +loop -cmp chroma -maxrate 3500k -bufsize 4M -bt 256k -refs 1 -bf 3 -coder 1 -me_method umh -me_range 16 -subq 7 -partitions +parti4x4+parti8x8+partp8x8+partb8x8 -g 250 -keyint_min 25 -level 30 -qmin 10 -qmax 51 -qcomp 0.6 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -acodec aac -b:a 384k -ar 48000 -ac 2",
-      "extension": "mp4",
-      "category": "PS3"
+      "extension": "mp4"
     },
-    {
-      "label": "PS3 720p Fullscreen",
+    "PS3 720p Fullscreen": {
       "params": "-f mp4 -r 23.976 -vcodec libx264 -preset slow -vf scale=1280:720 -b:v 3000k -aspect 4:3 -flags +loop -cmp chroma -maxrate 3500k -bufsize 4M -bt 256k -refs 1 -bf 3 -coder 1 -me_method umh -me_range 16 -subq 7 -partitions +parti4x4+parti8x8+partp8x8+partb8x8 -g 250 -keyint_min 25 -level 30 -qmin 10 -qmax 51 -qcomp 0.6 -trellis 2 -sc_threshold 40 -i_qfactor 0.71 -acodec aac -b:a 384k -ar 48000 -ac 2",
-      "extension": "mp4",
-      "category": "PS3"
+      "extension": "mp4"
     }
-  ],
-  "QuickTime": [
-    {
-      "label": "Quicktime MOV",
+  },
+  "QuickTime": {
+    "Quicktime MOV": {
       "params": "-f mov -acodec aac -b:v 1250k -r 25 -b:a 128k -vf scale=640:480 -ac 2 -ar 48000",
-      "extension": "mov",
-      "category": "QuickTime"
+      "extension": "mov"
     },
-    {
-      "label": "QuickTime H.264 video (high quality)",
+    "QuickTime H.264 video (high quality)": {
       "params": "-crf 35.0 -vcodec libx264 -preset slow -acodec aac -ar 48000 -b:a 128k -coder 1 -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method hex -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1 -threads 0",
-      "extension": "mov",
-      "category": "QuickTime"
+      "extension": "mov"
     },
-    {
-      "label": "QuickTime H.264 video (super high quality)",
+    "QuickTime H.264 video (super high quality)": {
       "params": "-crf 15.0 -vcodec libx264 -preset veryslow -acodec aac -ar 48000 -b:a 192k -coder 1 -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method hex -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1 -threads 0",
-      "extension": "mov",
-      "category": "QuickTime"
+      "extension": "mov"
     },
-    {
-      "label": "QuickTime H.264 video (very high quality)",
+    "QuickTime H.264 video (very high quality)": {
       "params": "-crf 25.0 -vcodec libx264 -preset slower -acodec aac -ar 48000 -b:a 160k -coder 1 -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method hex -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1 -threads 0",
-      "extension": "mov",
-      "category": "QuickTime"
+      "extension": "mov"
     }
-  ],
-  "Tuna-Vids": [
-    {
-      "label": "Tuna-vIDS",
+  },
+  "Tuna-Vids": {
+    "Tuna-vIDS": {
       "params": "-f avi -r 10 -vf scale=256:192 -aspect 256:192 -b:v 192k -bt 64k -vcodec libxvid -acodec libmp3lame -ar 32000 -b:a 96k -ac 2",
-      "extension": "avi",
-      "category": "Tuna-Vids"
+      "extension": "avi"
     }
-  ],
-  "walkman": [
-    {
-      "label": "Xvid walkman (4:3)",
+  },
+  "walkman": {
+    "Xvid walkman (4:3)": {
       "params": "-r 29.97 -vcodec libxvid -vf scale=320:240 -aspect 4:3 -maxrate 1500k -b:v 1250k -qmin 3 -qmax 5 -bufsize 4096 -mbd 2 -cmp 2 -subcmp 2 -g 300 -acodec aac -ar 48000 -b:a 80k -ac 2",
-      "extension": "mp4",
-      "category": "walkman"
+      "extension": "mp4"
     }
-  ],
-  "WMV": [
-    {
-      "label": "WMV2 Generic",
+  },
+  "WMV": {
+    "WMV2 Generic": {
       "params": "-vcodec wmv2 -acodec wmav2 -b:v 1000k -b:a 160k -r 25 -ac 2",
-      "extension": "wmv",
-      "category": "WMV"
+      "extension": "wmv"
     },
-    {
-      "label": "WMV for Web Use",
+    "WMV for Web Use": {
       "params": "-vcodec wmv2 -acodec wmav2 -b:v 640k -b:a 128k -r 29.97 -vf scale=320:240 -ac 2",
-      "extension": "wmv",
-      "category": "WMV"
+      "extension": "wmv"
     },
-    {
-      "label": "Xbox 360",
+    "Xbox 360": {
       "params": "-vcodec wmv2 -acodec wmav2 -b:v 1200k -b:a 160k -r 25 -vf scale=720:480 -ac 2",
-      "extension": "wmv",
-      "category": "WMV"
+      "extension": "wmv"
     },
-    {
-      "label": "Zune",
+    "Zune": {
       "params": "-vcodec wmv2 -acodec wmav2 -b:v 640k -b:a 128k -r 23.97 -vf scale=320:240 -ac 2",
-      "extension": "wmv",
-      "category": "WMV"
+      "extension": "wmv"
     },
-    {
-      "label": "Power Point",
+    "Power Point": {
       "params": "-vcodec wmv2 -acodec wmav2 -aspect 4:3 -b:v 500k -b:a 32k -ac 1 -ar 22050 -vf scale=320:240 -ac 2",
-      "extension": "wmv",
-      "category": "WMV"
+      "extension": "wmv"
     }
-  ],
-  "PSP": [
-    {
-      "label": "PSP Widescreen",
+  },
+  "PSP": {
+    "PSP Widescreen": {
       "params": "-f mp4 -r 29.97 -vcodec libx264 -preset slow -vf scale=480:272 -aspect 16:9 -b:v 1250k -maxrate 4M -bufsize 4M -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method umh -subq 6 -trellis 1 -refs 2 -bf 1 -coder 1 -me_range 16 -g 300 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -bt 1250k -qcomp 0.6 -qmin 10 -qmax 51 -qdiff 4 -level 21 -acodec aac -b:a 128k -ar 48000 -ac 2",
-      "extension": "mp4",
-      "category": "PSP"
+      "extension": "mp4"
     },
-    {
-      "label": "PSP Fullscreen",
+    "PSP Fullscreen": {
       "params": "-f mp4 -r 29.97 -vcodec libx264 -preset slow -vf scale=640:480 -aspect 4:3 -b:v 1250k -maxrate 4M -bufsize 4M -flags +loop -cmp chroma -partitions +parti4x4+partp8x8+partb8x8 -me_method umh -subq 6 -trellis 1 -refs 2 -bf 1 -coder 1 -me_range 16 -g 300 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -bt 1250k -qcomp 0.6 -qmin 10 -qmax 51 -qdiff 4 -level 21 -acodec aac -b:a 128k -ar 48000 -ac 2",
-      "extension": "mp4",
-      "category": "PSP"
+      "extension": "mp4"
     }
-  ]
+  }
 }
