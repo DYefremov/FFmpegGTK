@@ -261,7 +261,7 @@ Author: Dmitriy Yefremov
       </object>
     </child>
   </object>
-  <object class="GtkPopoverMenu" id="options_popover_menu">
+  <object class="GtkPopoverMenu" id="options_menu">
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="main_popover_box">
@@ -551,6 +551,7 @@ Author: Dmitriy Yefremov
       </object>
       <packing>
         <property name="submenu">main</property>
+        <property name="position">1</property>
       </packing>
     </child>
   </object>
@@ -666,7 +667,7 @@ Author: Dmitriy Yefremov
             <property name="receives_default">True</property>
             <property name="tooltip_text" translatable="yes">Options</property>
             <property name="direction">none</property>
-            <property name="popover">options_popover_menu</property>
+            <property name="popover">options_menu</property>
             <child>
               <placeholder/>
             </child>
@@ -700,6 +701,7 @@ Author: Dmitriy Yefremov
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="model">files_list_store</property>
+                    <property name="headers_visible">False</property>
                     <property name="reorderable">True</property>
                     <property name="search_column">1</property>
                     <property name="rubber_banding">True</property>
@@ -714,7 +716,9 @@ Author: Dmitriy Yefremov
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="file_column">
+                        <property name="sizing">autosize</property>
                         <property name="title" translatable="yes">File</property>
+                        <property name="expand">True</property>
                         <property name="sort_column_id">1</property>
                         <child>
                           <object class="GtkCellRendererPixbuf" id="icon_renderer">
@@ -733,9 +737,14 @@ Author: Dmitriy Yefremov
                             <attribute name="text">1</attribute>
                           </attributes>
                         </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="progress_column">
+                        <property name="title" translatable="yes">Progress</property>
                         <child>
                           <object class="GtkCellRendererProgress" id="progress">
-                            <property name="width">120</property>
+                            <property name="width">150</property>
                             <property name="xpad">5</property>
                             <property name="ypad">5</property>
                           </object>
@@ -744,9 +753,14 @@ Author: Dmitriy Yefremov
                             <attribute name="value">2</attribute>
                           </attributes>
                         </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="selected_column">
+                        <property name="title" translatable="yes">Selected</property>
                         <child>
                           <object class="GtkCellRendererToggle" id="selected_renderer">
-                            <property name="xpad">10</property>
+                            <property name="xpad">5</property>
                             <signal name="toggled" handler="on_selected_toggled" swapped="no"/>
                           </object>
                           <attributes>
@@ -981,12 +995,5 @@ Author: Dmitriy Yefremov
         <accelerator key="Delete" signal="activate"/>
       </object>
     </child>
-  </object>
-  <object class="GtkStatusIcon" id="status_icon">
-    <property name="pixbuf">img/logo.png</property>
-    <property name="stock">gtk-execute</property>
-    <property name="icon_name">gtk-execute</property>
-    <property name="has_tooltip">True</property>
-    <property name="tooltip_text" translatable="yes">Converting started...</property>
   </object>
 </interface>

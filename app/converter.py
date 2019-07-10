@@ -10,7 +10,7 @@ from threading import Thread
 
 import gi
 
-from app.commons import get_default_presets
+from app.commons import Presets, AppConfig
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio, GLib, Gdk
@@ -84,9 +84,11 @@ class Application(Gtk.Application):
                     "on_show_output_switch": self.on_show_output_switch,
                     "on_about": self.on_about,
                     "on_exit": self.on_exit,
+                    "on_resize": self.on_resize,
                     "on_convert": self.on_convert,
                     "on_cancel": self.on_cancel}
 
+        self._config = AppConfig()
         self._presets = None
         self._current_process = None
         self._in_progress = False
@@ -98,6 +100,7 @@ class Application(Gtk.Application):
         builder.add_from_file(UI_RESOURCES_PATH + "converter.glade")
         builder.connect_signals(handlers)
         self._main_window = builder.get_object("main_window")
+        self._main_window.resize(*self._config.main_window_size)
         self._file_tree_view = builder.get_object("file_tree_view")
         self._files_model = builder.get_object("files_list_store")
         self._details_text_view = builder.get_object("details_text_view")
@@ -128,6 +131,7 @@ class Application(Gtk.Application):
 
     def do_shutdown(self):
         """  Performs shutdown tasks """
+        self._config.save()
         Gtk.Application.do_shutdown(self)
 
     def do_command_line(self, command_line):
@@ -141,7 +145,7 @@ class Application(Gtk.Application):
         return 0
 
     def init_convert_elements(self):
-        self._presets = get_default_presets(UI_RESOURCES_PATH + "presets.json")
+        self._presets = Presets.get_default_presets(UI_RESOURCES_PATH + "presets.json")
         list(map(self._convert_to_combo_box.append_text, sorted(self._presets)))
 
     def on_add_files(self, button):
@@ -226,6 +230,10 @@ class Application(Gtk.Application):
 
     def on_exit(self, item):
         self._main_window.destroy()
+
+    def on_resize(self, window):
+        """ Stores new size properties for app window after resize """
+        self._config.main_window_size = window.get_size()
 
     def on_convert(self, item):
         self._info_bar.hide()
