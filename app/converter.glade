@@ -139,6 +139,8 @@ Author: Dmitriy Yefremov
       <column type="GdkPixbuf"/>
       <!-- column-name file -->
       <column type="gchararray"/>
+      <!-- column-name duration -->
+      <column type="gchararray"/>
       <!-- column-name progress -->
       <column type="GtkLevelBarMode"/>
       <!-- column-name select -->
@@ -600,8 +602,8 @@ Author: Dmitriy Yefremov
                 <property name="stock">gtk-add</property>
               </object>
             </child>
-            <accelerator key="Insert" signal="clicked"/>
             <accelerator key="i" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
+            <accelerator key="Insert" signal="clicked"/>
           </object>
           <packing>
             <property name="position">1</property>
@@ -740,6 +742,19 @@ Author: Dmitriy Yefremov
                       </object>
                     </child>
                     <child>
+                      <object class="GtkTreeViewColumn" id="duration_column">
+                        <property name="title" translatable="yes">Duration</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="duration_renderer">
+                            <property name="xpad">5</property>
+                          </object>
+                          <attributes>
+                            <attribute name="text">2</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkTreeViewColumn" id="progress_column">
                         <property name="title" translatable="yes">Progress</property>
                         <child>
@@ -749,8 +764,8 @@ Author: Dmitriy Yefremov
                             <property name="ypad">5</property>
                           </object>
                           <attributes>
-                            <attribute name="visible">4</attribute>
-                            <attribute name="value">2</attribute>
+                            <attribute name="visible">5</attribute>
+                            <attribute name="value">3</attribute>
                           </attributes>
                         </child>
                       </object>
@@ -760,11 +775,11 @@ Author: Dmitriy Yefremov
                         <property name="title" translatable="yes">Selected</property>
                         <child>
                           <object class="GtkCellRendererToggle" id="selected_renderer">
-                            <property name="xpad">5</property>
+                            <property name="xpad">10</property>
                             <signal name="toggled" handler="on_selected_toggled" swapped="no"/>
                           </object>
                           <attributes>
-                            <attribute name="active">3</attribute>
+                            <attribute name="active">4</attribute>
                           </attributes>
                         </child>
                       </object>

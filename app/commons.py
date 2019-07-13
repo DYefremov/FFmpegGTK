@@ -1,7 +1,9 @@
 import json
 import os
 import pathlib
+import subprocess
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 from xml.dom.minidom import parse, Node
 
@@ -68,6 +70,22 @@ class Presets:
 
             with open(json_path, "w") as config_file:
                 json.dump(out, config_file, indent=2)
+
+
+class FFmpeg:
+
+    @staticmethod
+    @lru_cache(maxsize=10)
+    def get_metadata(path):
+        """ Returns metadata from the file. """
+        try:
+            md = subprocess.check_output(
+                ["ffprobe", "-i", path, "-v", "quiet", "-print_format", "json", "-show_format"])
+        except subprocess.CalledProcessError as e:
+            print(e)
+        else:
+            return json.loads(str(md, errors="replace")).get("format", {})
+        return {}
 
 
 if __name__ == "__main__":

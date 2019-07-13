@@ -3,6 +3,7 @@ import mimetypes
 import os
 import re
 import subprocess
+from datetime import timedelta
 from enum import IntEnum
 from functools import wraps
 from pathlib import Path
@@ -10,7 +11,7 @@ from threading import Thread
 
 import gi
 
-from app.commons import Presets, AppConfig
+from app.commons import Presets, AppConfig, FFmpeg
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio, GLib, Gdk
@@ -32,9 +33,10 @@ class Column(IntEnum):
     """ Column nums in the view """
     ICON = 0
     FILE = 1
-    PROGRESS = 2
-    SELECTED = 3
-    IN_PROGRESS = 4
+    DURATION = 2
+    PROGRESS = 3
+    SELECTED = 4
+    IN_PROGRESS = 5
 
 
 def run_task(func):
@@ -154,16 +156,19 @@ class Application(Gtk.Application):
                                        use_header_bar=IS_GNOME_SESSION, select_multiple=True)
         dialog.set_filter(self._file_filter)
 
-        response = dialog.run()
-        if response == Gtk.ResponseType.OK:
-            for p in dialog.get_filenames():
-                mime = self._mime_types.guess_type(p)[0]
-                if mime:
-                    is_video = "video" in mime
-                    icon = self._mime_icon_video if is_video else self._mime_icon_audio
-                    self._files_model.append((icon, p, None, True, False))
+        if dialog.run() == Gtk.ResponseType.OK:
+            gen = self.append_files(dialog.get_filenames())
+            GLib.idle_add(lambda: next(gen, False))
 
         dialog.destroy()
+
+    def append_files(self, files):
+        for f in files:
+            mime = self._mime_types.guess_type(f)[0]
+            if mime:
+                is_video = "video" in mime
+                icon = self._mime_icon_video if is_video else self._mime_icon_audio
+                yield self._files_model.append((icon, f, self.get_duration(f), None, True, False))
 
     def on_remove(self, item=None):
         model, paths = self._file_tree_view.get_selection().get_selected_rows()
@@ -221,7 +226,7 @@ class Application(Gtk.Application):
 
     def on_about(self, button):
         builder = Gtk.Builder()
-        builder.set_translation_domain("vsf-converter")
+        builder.set_translation_domain(TEXT_DOMAIN)
         builder.add_objects_from_file(UI_RESOURCES_PATH + "converter.glade", ("about_dialog",))
         dialog = builder.get_object("about_dialog")
         dialog.set_transient_for(self._main_window)
@@ -350,6 +355,11 @@ class Application(Gtk.Application):
     def update_active_buttons(self, active):
         self._convert_button.set_visible(active)
         self._cancel_button.set_visible(not active)
+
+    @staticmethod
+    def get_duration(path):
+        metadata = FFmpeg.get_metadata(path)
+        return str(timedelta(seconds=int(float(metadata.get("duration", 0)))))
 
 
 if __name__ == "__main__":
