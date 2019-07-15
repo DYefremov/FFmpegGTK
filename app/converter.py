@@ -152,15 +152,18 @@ class Application(Gtk.Application):
 
     def on_add_files(self, button):
         dialog = Gtk.FileChooserDialog("", self._main_window, Gtk.FileChooserAction.OPEN,
-                                       (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK),
-                                       use_header_bar=IS_GNOME_SESSION, select_multiple=True)
+                                       (Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE, Gtk.STOCK_ADD, Gtk.ResponseType.NO),
+                                       use_header_bar=IS_GNOME_SESSION, select_multiple=True, modal=True)
         dialog.set_filter(self._file_filter)
+        dialog.connect("response", self.add_files_callback)
+        dialog.show()
 
-        if dialog.run() == Gtk.ResponseType.OK:
+    def add_files_callback(self, dialog, response):
+        if response == Gtk.ResponseType.NO:
             gen = self.append_files(dialog.get_filenames())
             GLib.idle_add(lambda: next(gen, False))
-
-        dialog.destroy()
+        else:
+            dialog.destroy()
 
     def append_files(self, files):
         for f in files:
@@ -168,7 +171,8 @@ class Application(Gtk.Application):
             if mime:
                 is_video = "video" in mime
                 icon = self._mime_icon_video if is_video else self._mime_icon_audio
-                yield self._files_model.append((icon, f, self.get_duration(f), None, True, False))
+                # TODO: think how to fix Gtk-WARNING for file names with '&' symbol
+                yield self._files_model.append((icon, f.replace("&", "&amp;"), self.get_duration(f), None, True, False))
 
     def on_remove(self, item=None):
         model, paths = self._file_tree_view.get_selection().get_selected_rows()
@@ -264,7 +268,7 @@ class Application(Gtk.Application):
         overwrite = "-y" if self._overwrite_if_exists_switch.get_state() else "-n"
 
         for row in filter(lambda r: r[Column.SELECTED], self._files_model):
-            in_file = row[Column.FILE]
+            in_file = row[Column.FILE].replace("&amp;", "&")
             in_path = Path(in_file)
             out_path = str(in_path.parent) + os.sep if use_source_folder else base_path + os.sep
             out_file = "{}{}.{}".format(out_path, in_path.stem, extension)
