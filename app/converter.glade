@@ -565,6 +565,8 @@ Author: Dmitriy Yefremov
     <property name="default_height">320</property>
     <property name="icon">img/logo.png</property>
     <property name="gravity">center</property>
+    <signal name="check-resize" handler="on_resize" swapped="no"/>
+    <signal name="delete-event" handler="on_exit" swapped="no"/>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
         <property name="visible">True</property>

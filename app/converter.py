@@ -112,6 +112,8 @@ class Application(Gtk.Application):
         self._overwrite_if_exists_switch = builder.get_object("overwrite_if_exists_switch")
         self._convert_button = builder.get_object("convert_button")
         self._cancel_button = builder.get_object("cancel_button")
+        self._add_files_button = builder.get_object("add_files_button")
+        self._add_files_main_menu_button = builder.get_object("add_files_main_menu_button")
         self._count_label = builder.get_object("count_label")
         self._info_bar = builder.get_object("info_bar")
         self._info_bar_message_label = builder.get_object("info_bar_message_label")
@@ -125,6 +127,12 @@ class Application(Gtk.Application):
     def do_startup(self):
         Gtk.Application.do_startup(self)
         self.init_convert_elements()
+        try:
+            subprocess.check_output(["ffprobe", "-help"], stderr=subprocess.STDOUT)
+        except FileNotFoundError as e:
+            self.show_info_message("Error. {} {}".format(e, "Check if FFmpeg is installed!"), Gtk.MessageType.ERROR)
+            self._add_files_button.set_sensitive(False)
+            self._add_files_main_menu_button.set_sensitive(False)
 
     def do_activate(self):
         self._main_window.set_application(self)
@@ -237,7 +245,10 @@ class Application(Gtk.Application):
         dialog.run()
         dialog.destroy()
 
-    def on_exit(self, item):
+    def on_exit(self, window=None, event=None):
+        if self._in_progress and not self.on_cancel():
+            return True
+
         self._main_window.destroy()
 
     def on_resize(self, window):
@@ -309,17 +320,19 @@ class Application(Gtk.Application):
                 self.show_info_message("Done!", Gtk.MessageType.INFO)
                 GLib.idle_add(self._files_model.set_value, self._current_itr, Column.PROGRESS, 100)
 
-    def on_cancel(self, item):
+    def on_cancel(self, item=None):
         dialog = Gtk.MessageDialog(self._main_window, True, Gtk.MessageType.QUESTION,
                                    (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK),
-                                   "Are you sure?", use_header_bar=IS_GNOME_SESSION)
-        response = dialog.run()
-        if response == Gtk.ResponseType.OK:
+                                   "Are you sure?")
+        is_ok = dialog.run() == Gtk.ResponseType.OK
+        if is_ok:
             self._in_progress = False
             if self._current_process:
                 self._current_process.terminate()
             self.show_info_message("Task canceled.", Gtk.MessageType.WARNING)
         dialog.destroy()
+
+        return is_ok
 
     def write_to_buffer(self, fd, condition):
         if condition == GLib.IO_IN:
