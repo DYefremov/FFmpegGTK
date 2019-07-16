@@ -88,7 +88,8 @@ class Application(Gtk.Application):
                     "on_exit": self.on_exit,
                     "on_resize": self.on_resize,
                     "on_convert": self.on_convert,
-                    "on_cancel": self.on_cancel}
+                    "on_cancel": self.on_cancel,
+                    "on_query_tooltip": self.on_query_tooltip}
 
         self._config = AppConfig()
         self._presets = None
@@ -98,7 +99,7 @@ class Application(Gtk.Application):
         self._current_itr = None
 
         builder = Gtk.Builder()
-        builder.set_translation_domain(TEXT_DOMAIN)
+        # builder.set_translation_domain(TEXT_DOMAIN)
         builder.add_from_file(UI_RESOURCES_PATH + "converter.glade")
         builder.connect_signals(handlers)
         self._main_window = builder.get_object("main_window")
@@ -123,6 +124,8 @@ class Application(Gtk.Application):
         self._mime_types = mimetypes.MimeTypes()
         self._mime_icon_video = Gtk.IconTheme.get_default().load_icon("video-x-generic", 24, 0)
         self._mime_icon_audio = Gtk.IconTheme.get_default().load_icon("audio-x-generic", 24, 0)
+        # Tooltip
+        self._file_tree_view.set_has_tooltip(True)
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
@@ -179,8 +182,7 @@ class Application(Gtk.Application):
             if mime:
                 is_video = "video" in mime
                 icon = self._mime_icon_video if is_video else self._mime_icon_audio
-                # TODO: think how to fix Gtk-WARNING for file names with '&' symbol
-                yield self._files_model.append((icon, f.replace("&", "&amp;"), self.get_duration(f), None, True, False))
+                yield self._files_model.append((icon, f, self.get_duration(f), None, True, False))
 
     def on_remove(self, item=None):
         model, paths = self._file_tree_view.get_selection().get_selected_rows()
@@ -279,7 +281,7 @@ class Application(Gtk.Application):
         overwrite = "-y" if self._overwrite_if_exists_switch.get_state() else "-n"
 
         for row in filter(lambda r: r[Column.SELECTED], self._files_model):
-            in_file = row[Column.FILE].replace("&amp;", "&")
+            in_file = row[Column.FILE]
             in_path = Path(in_file)
             out_path = str(in_path.parent) + os.sep if use_source_folder else base_path + os.sep
             out_file = "{}{}.{}".format(out_path, in_path.stem, extension)
@@ -334,6 +336,19 @@ class Application(Gtk.Application):
 
         return is_ok
 
+    def on_query_tooltip(self, view: Gtk.TreeView, x, y, keyboard_mode, tooltip: Gtk.Tooltip):
+        """  Sets extended info about file in the tooltip. """
+        result = view.get_path_at_pos(x, y)
+        if result is None:
+            return False
+
+        path, column, _x, _y = result
+        tooltip.set_icon(self._files_model[path][Column.ICON])
+        tooltip.set_text(self.get_file_info(self._files_model[path][Column.FILE]))
+        view.set_tooltip_row(tooltip, path)
+
+        return True
+
     def write_to_buffer(self, fd, condition):
         if condition == GLib.IO_IN:
             line = fd.readline()
@@ -377,6 +392,14 @@ class Application(Gtk.Application):
     def get_duration(path):
         metadata = FFmpeg.get_metadata(path)
         return str(timedelta(seconds=int(float(metadata.get("duration", 0)))))
+
+    @staticmethod
+    def get_file_info(path):
+        """ Returns file info from the metadata. """
+        md = FFmpeg.get_metadata(path)
+        info = ["{}: {}".format(k.replace("_", " ").capitalize(), v) for k, v in md.items() if type(v) is str]
+
+        return "\n".join(info)
 
 
 if __name__ == "__main__":
