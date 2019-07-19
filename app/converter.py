@@ -73,9 +73,8 @@ class Application(Gtk.Application):
 
         handlers = {"on_add_files": self.on_add_files,
                     "on_remove": self.on_remove,
-                    "on_convert_to_changed": self.on_convert_to_changed,
+                    "on_category_changed": self.on_category_changed,
                     "on_source_state_set": self.on_source_state_set,
-                    "on_options_apply": self.on_options_apply,
                     "on_selected_toggled": self.on_selected_toggled,
                     "on_select_all": self.on_select_all,
                     "on_unselect": self.on_unselect,
@@ -89,7 +88,17 @@ class Application(Gtk.Application):
                     "on_resize": self.on_resize,
                     "on_convert": self.on_convert,
                     "on_cancel": self.on_cancel,
-                    "on_query_tooltip": self.on_query_tooltip}
+                    "on_query_tooltip": self.on_query_tooltip,
+                    "on_category_add": self.on_category_add,
+                    "on_category_edit": self.on_category_edit,
+                    "on_category_remove": self.on_category_remove,
+                    "on_category_restore_defaults": self.on_category_restore_defaults,
+                    "on_profile_add": self.on_profile_add,
+                    "on_profile_edit": self.on_profile_edit,
+                    "on_profile_remove": self.on_profile_remove,
+                    "on_options_add": self.on_options_add,
+                    "on_options_apply": self.on_options_apply,
+                    "on_options_cancel": self.on_options_cancel}
 
         self._config = AppConfig()
         self._presets = None
@@ -99,16 +108,25 @@ class Application(Gtk.Application):
         self._current_itr = None
 
         builder = Gtk.Builder()
-        # builder.set_translation_domain(TEXT_DOMAIN)
+        builder.set_translation_domain(TEXT_DOMAIN)
         builder.add_from_file(UI_RESOURCES_PATH + "converter.glade")
         builder.connect_signals(handlers)
+
         self._main_window = builder.get_object("main_window")
         self._main_window.resize(*self._config.main_window_size)
         self._file_tree_view = builder.get_object("file_tree_view")
         self._files_model = builder.get_object("files_list_store")
         self._details_text_view = builder.get_object("details_text_view")
-        self._convert_to_combo_box = builder.get_object("convert_to_combo_box")
-        self._convert_options_combo_box = builder.get_object("convert_options_combo_box")
+        self._category_combo_box = builder.get_object("category_combo_box")
+        self._profile_combo_box = builder.get_object("profile_combo_box")
+        self._profile_box = builder.get_object("profile_box")
+        self._output_main_box = builder.get_object("output_main_box")
+        self._options_add_button = builder.get_object("options_add_button")
+        self._options_apply_button = builder.get_object("options_apply_button")
+        self._options_cancel_button = builder.get_object("options_cancel_button")
+        self._profile_name_entry = builder.get_object("profile_name_entry")
+        self._profile_params_entry = builder.get_object("profile_params_entry")
+        self._profile_extension_entry = builder.get_object("profile_extension_entry")
         self._output_folder_chooser = builder.get_object("output_folder_chooser")
         self._overwrite_if_exists_switch = builder.get_object("overwrite_if_exists_switch")
         self._convert_button = builder.get_object("convert_button")
@@ -126,6 +144,16 @@ class Application(Gtk.Application):
         self._mime_icon_audio = Gtk.IconTheme.get_default().load_icon("audio-x-generic", 24, 0)
         # Tooltip
         self._file_tree_view.set_has_tooltip(True)
+
+        self._profile_box.bind_property("visible", self._options_apply_button, "visible")
+        self._profile_box.bind_property("visible", self._options_add_button, "visible")
+        self._profile_box.bind_property("visible", self._options_cancel_button, "visible")
+        self._profile_combo_box.bind_property("visible", self._category_combo_box, "sensitive")
+        self._profile_combo_box.bind_property("visible", self._output_main_box, "visible")
+        self._profile_combo_box.bind_property("visible", builder.get_object("profile_label"), "visible")
+        self._profile_combo_box.bind_property("visible", builder.get_object("options_ok_button"), "visible")
+        self._profile_combo_box.bind_property("visible", builder.get_object("category_menu_button"), "visible")
+        self._profile_combo_box.bind_property("visible", builder.get_object("profile_menu_button"), "visible")
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
@@ -145,6 +173,7 @@ class Application(Gtk.Application):
     def do_shutdown(self):
         """  Performs shutdown tasks """
         self._config.save()
+        Presets.save(self._presets)
         Gtk.Application.do_shutdown(self)
 
     def do_command_line(self, command_line):
@@ -158,8 +187,10 @@ class Application(Gtk.Application):
         return 0
 
     def init_convert_elements(self):
-        self._presets = Presets.get_default_presets(UI_RESOURCES_PATH + "presets.json")
-        list(map(self._convert_to_combo_box.append_text, sorted(self._presets)))
+        self._presets = Presets.get_presets()
+        if not self._presets:
+            self._presets = Presets.get_default_presets(UI_RESOURCES_PATH + "presets.json")
+        list(map(self._category_combo_box.append_text, sorted(self._presets)))
 
     def on_add_files(self, button):
         dialog = Gtk.FileChooserDialog("", self._main_window, Gtk.FileChooserAction.OPEN,
@@ -189,16 +220,14 @@ class Application(Gtk.Application):
         for itr in [model.get_iter(p) for p in paths]:
             del model[itr]
 
-    def on_convert_to_changed(self, box):
+    def on_category_changed(self, box):
         options = self._presets.get(box.get_active_text())
-        self._convert_options_combo_box.get_model().clear()
-        list(map(self._convert_options_combo_box.append_text, options.keys()))
+        self._profile_combo_box.get_model().clear()
+        if options:
+            list(map(self._profile_combo_box.append_text, options.keys()))
 
     def on_source_state_set(self, switch, state):
         self._output_folder_chooser.set_sensitive(not state)
-
-    def on_options_apply(self, button):
-        pass
 
     def on_selected_toggled(self, toggle, path):
         self._files_model.set_value(self._files_model.get_iter(path), Column.SELECTED, not toggle.get_active())
@@ -227,7 +256,7 @@ class Application(Gtk.Application):
         elif key_value in (Gdk.KEY_Delete, Gdk.KEY_KP_Delete):
             self.on_remove()
 
-    def on_info_bar_close(self, bar, resp):
+    def on_info_bar_close(self, bar, resp=None):
         bar.hide()
 
     def on_file_model_changed(self, model, path, iter=None):
@@ -259,8 +288,8 @@ class Application(Gtk.Application):
 
     def on_convert(self, item):
         self._info_bar.hide()
-        fmt = self._convert_to_combo_box.get_active_text()
-        option = self._convert_options_combo_box.get_active_text()
+        fmt = self._category_combo_box.get_active_text()
+        option = self._profile_combo_box.get_active_text()
         if not fmt and not option:
             self.show_info_message("Error. Check the settings!", Gtk.MessageType.ERROR)
             return
@@ -349,6 +378,105 @@ class Application(Gtk.Application):
 
         return True
 
+    # ********** Options ***********
+
+    def on_category_add(self, item):
+        pass
+
+    def on_category_edit(self, item):
+        pass
+
+    def on_category_remove(self, item):
+        category = self._category_combo_box.get_active_text()
+        if not category:
+            self.show_info_message("No category selected!", Gtk.MessageType.ERROR)
+            return
+
+        self._presets.pop(category, None)
+        self._category_combo_box.remove(self._category_combo_box.get_active())
+
+    def on_category_restore_defaults(self, item):
+        self._presets = Presets.get_default_presets(UI_RESOURCES_PATH + "presets.json")
+        self._category_combo_box.remove_all()
+        list(map(self._category_combo_box.append_text, sorted(self._presets)))
+        self.show_info_message("Done!", Gtk.MessageType.INFO)
+
+    def on_profile_add(self, item):
+        category = self._category_combo_box.get_active_text()
+        if not category:
+            self.show_info_message("No category selected!", Gtk.MessageType.ERROR)
+            return
+
+        self.update_active_option_elements(True)
+        self._options_apply_button.set_visible(False)
+        self.update_profile_entries()
+
+    def on_profile_edit(self, item):
+        category = self._category_combo_box.get_active_text()
+        if not category:
+            self.show_info_message("No category selected!", Gtk.MessageType.ERROR)
+            return
+
+        profile = self._profile_combo_box.get_active_text()
+        if not profile:
+            self.show_info_message("No profile selected!", Gtk.MessageType.ERROR)
+            return
+
+        self.update_active_option_elements(True)
+        self._options_add_button.set_visible(False)
+        p_data = self._presets.get(category).get(profile)
+        self.update_profile_entries(profile, p_data.get("params"), p_data.get("extension"))
+
+    def on_profile_remove(self, item):
+        profile = self._profile_combo_box.get_active_text()
+        if not profile:
+            self.show_info_message("No profile selected!", Gtk.MessageType.ERROR)
+            return
+
+        category = self._presets.get(self._category_combo_box.get_active_text())
+        category.pop(profile, None)
+        self.on_category_changed(self._category_combo_box)
+
+    def on_options_add(self, button, event):
+        category = self._presets.get(self._category_combo_box.get_active_text())
+        profile_name = self._profile_name_entry.get_text()
+
+        if profile_name in category:
+            self.show_info_message("Profile with this name already exists!", Gtk.MessageType.ERROR)
+            return True
+
+        prf = {"params": self._profile_params_entry.get_text(), "extension": self._profile_extension_entry.get_text()}
+        category[profile_name] = prf
+
+        self.on_category_changed(self._category_combo_box)
+        self._profile_combo_box.set_active_id(profile_name)
+        self.show_info_message("Profile successfully added!", Gtk.MessageType.ERROR)
+
+        return True
+
+    def on_options_apply(self, button, event):
+        category_name = self._category_combo_box.get_active_text()
+        category = self._presets.get(category_name)
+        current_name = self._profile_combo_box.get_active_text()
+        new_name = self._profile_name_entry.get_text()
+
+        profile = category.pop(current_name) if current_name != new_name else category.get(current_name)
+        profile["params"] = self._profile_params_entry.get_text()
+        profile["extension"] = self._profile_extension_entry.get_text()
+        category[new_name] = profile
+
+        self.on_category_changed(self._category_combo_box)
+        self._profile_combo_box.set_active_id(new_name)
+
+        return self.on_options_cancel()
+
+    def on_options_cancel(self, button=None, event=None):
+        """"  Returns True to prevent the popover menu from closing. """
+        self.update_active_option_elements(False)
+        self._category_combo_box.set_sensitive(True)
+
+        return True
+
     def write_to_buffer(self, fd, condition):
         if condition == GLib.IO_IN:
             line = fd.readline()
@@ -387,6 +515,17 @@ class Application(Gtk.Application):
     def update_active_buttons(self, active):
         self._convert_button.set_visible(active)
         self._cancel_button.set_visible(not active)
+
+    def update_active_option_elements(self, active):
+        self._profile_box.set_visible(active)
+        if active:
+            self._profile_box.set_size_request(self._output_main_box.get_allocated_width(), 0)
+        self._profile_combo_box.set_visible(not active)
+
+    def update_profile_entries(self, name="", params="", extension=""):
+        self._profile_name_entry.set_text(name)
+        self._profile_params_entry.set_text(params)
+        self._profile_extension_entry.set_text(extension)
 
     @staticmethod
     def get_duration(path):

@@ -40,6 +40,12 @@ class Presets:
     """ Helper class for working with presets. """
 
     @staticmethod
+    def get_presets():
+        presets_file = AppConfig.CONFIG_PATH + "presets.json"
+        if os.path.isfile(presets_file) and os.stat(presets_file).st_size > 0:
+            return Presets.get_default_presets(presets_file)
+
+    @staticmethod
     def get_default_presets(json_path):
         """ Getting default presets from json file.
 
@@ -47,6 +53,12 @@ class Presets:
         """
         with open(json_path, "r") as presets_file:
             return json.load(presets_file)
+
+    @staticmethod
+    def save(presets: dict):
+        presets_file = AppConfig.CONFIG_PATH + "presets.json"
+        with open(presets_file, "w") as presets_file:
+            return json.dump(presets, presets_file, indent=2)
 
     @staticmethod
     def convert_presets_xml_to_json(xml_path, json_path):
