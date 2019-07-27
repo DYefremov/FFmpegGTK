@@ -118,9 +118,11 @@ class Application(Gtk.Application):
         self._files_model = builder.get_object("files_list_store")
         self._details_text_view = builder.get_object("details_text_view")
         self._category_combo_box = builder.get_object("category_combo_box")
+        self._category_name_entry = builder.get_object("category_name_entry")
         self._profile_combo_box = builder.get_object("profile_combo_box")
         self._profile_box = builder.get_object("profile_box")
         self._output_main_box = builder.get_object("output_main_box")
+        self._options_ok_button = builder.get_object("options_ok_button")
         self._options_add_button = builder.get_object("options_add_button")
         self._options_apply_button = builder.get_object("options_apply_button")
         self._options_cancel_button = builder.get_object("options_cancel_button")
@@ -144,15 +146,25 @@ class Application(Gtk.Application):
         self._mime_icon_audio = Gtk.IconTheme.get_default().load_icon("audio-x-generic", 24, 0)
         # Tooltip
         self._file_tree_view.set_has_tooltip(True)
-
-        self._profile_box.bind_property("visible", self._options_apply_button, "visible")
-        self._profile_box.bind_property("visible", self._options_add_button, "visible")
+        # Category (4 = G_BINDING_INVERT_BOOLEAN)
+        profile_label = builder.get_object("profile_label")
+        category_menu_button = builder.get_object("category_menu_button")
+        self._category_name_entry.bind_property("visible", self._options_cancel_button, "visible")
+        self._category_name_entry.bind_property("visible", self._options_ok_button, "visible", 4)
+        self._category_name_entry.bind_property("visible", self._output_main_box, "sensitive", 4)
+        self._category_name_entry.bind_property("visible", profile_label, "sensitive", 4)
+        self._category_name_entry.bind_property("visible", category_menu_button, "sensitive", 4)
+        self._category_name_entry.bind_property("visible", self._category_combo_box, "visible", 4)
+        self._category_name_entry.bind_property("visible", builder.get_object("profile_main_box"), "sensitive", 4)
+        # Profile
         self._profile_box.bind_property("visible", self._options_cancel_button, "visible")
+        self._options_cancel_button.bind_property("visible", self._options_apply_button, "visible")
+        self._options_cancel_button.bind_property("visible", self._options_add_button, "visible")
         self._profile_combo_box.bind_property("visible", self._category_combo_box, "sensitive")
         self._profile_combo_box.bind_property("visible", self._output_main_box, "visible")
-        self._profile_combo_box.bind_property("visible", builder.get_object("profile_label"), "visible")
-        self._profile_combo_box.bind_property("visible", builder.get_object("options_ok_button"), "visible")
-        self._profile_combo_box.bind_property("visible", builder.get_object("category_menu_button"), "visible")
+        self._profile_combo_box.bind_property("visible", self._options_ok_button, "visible")
+        self._profile_combo_box.bind_property("visible", profile_label, "visible")
+        self._profile_combo_box.bind_property("visible", category_menu_button, "visible")
         self._profile_combo_box.bind_property("visible", builder.get_object("profile_menu_button"), "visible")
 
     def do_startup(self):
@@ -381,10 +393,19 @@ class Application(Gtk.Application):
     # ********** Options ***********
 
     def on_category_add(self, item):
-        pass
+        self._category_name_entry.set_text("")
+        self._category_name_entry.set_visible(True)
+        self._options_apply_button.set_visible(False)
 
     def on_category_edit(self, item):
-        pass
+        category = self._category_combo_box.get_active_text()
+        if not category:
+            self.show_info_message("No category selected!", Gtk.MessageType.ERROR)
+            return
+
+        self._category_name_entry.set_visible(True)
+        self._options_add_button.set_visible(False)
+        self._category_name_entry.set_text(category)
 
     def on_category_remove(self, item):
         category = self._category_combo_box.get_active_text()
@@ -438,40 +459,75 @@ class Application(Gtk.Application):
         self.on_category_changed(self._category_combo_box)
 
     def on_options_add(self, button, event):
+        return self.category_add() if self._category_name_entry.get_visible() else self.profile_add()
+
+    def category_add(self):
+        category_name = self._category_name_entry.get_text()
+        if category_name in self._presets:
+            self.show_info_message("Category with this name already exists!", Gtk.MessageType.ERROR)
+            return True
+
+        self._category_name_entry.set_visible(False)
+        self._presets[category_name] = {}
+        self.update_categories(category_name)
+
+        return True
+
+    def update_categories(self, active_category):
+        self._category_combo_box.remove_all()
+        cat_index = 0
+        for index, c in enumerate(sorted(self._presets)):
+            if c == active_category:
+                cat_index = index
+            self._category_combo_box.append_text(c)
+        self._category_combo_box.set_active(cat_index)
+        self.on_category_changed(self._category_combo_box)
+
+    def profile_add(self):
         category = self._presets.get(self._category_combo_box.get_active_text())
         profile_name = self._profile_name_entry.get_text()
-
         if profile_name in category:
             self.show_info_message("Profile with this name already exists!", Gtk.MessageType.ERROR)
             return True
 
         prf = {"params": self._profile_params_entry.get_text(), "extension": self._profile_extension_entry.get_text()}
         category[profile_name] = prf
-
         self.on_category_changed(self._category_combo_box)
         self._profile_combo_box.set_active_id(profile_name)
-        self.show_info_message("Profile successfully added!", Gtk.MessageType.ERROR)
+        self.show_info_message("Profile successfully added!", Gtk.MessageType.INFO)
 
         return True
 
     def on_options_apply(self, button, event):
+        self.category_options_apply() if self._category_name_entry.get_visible() else self.profile_options_apply()
+
+        return self.on_options_cancel()
+
+    def category_options_apply(self):
+        category_name = self._category_combo_box.get_active_text()
+        new_name = self._category_name_entry.get_text()
+        if category_name != new_name:
+            self._presets[new_name] = self._presets.pop(category_name, {})
+            self.update_categories(new_name)
+
+    def profile_options_apply(self):
         category_name = self._category_combo_box.get_active_text()
         category = self._presets.get(category_name)
         current_name = self._profile_combo_box.get_active_text()
         new_name = self._profile_name_entry.get_text()
-
         profile = category.pop(current_name) if current_name != new_name else category.get(current_name)
         profile["params"] = self._profile_params_entry.get_text()
         profile["extension"] = self._profile_extension_entry.get_text()
         category[new_name] = profile
-
         self.on_category_changed(self._category_combo_box)
         self._profile_combo_box.set_active_id(new_name)
 
-        return self.on_options_cancel()
-
     def on_options_cancel(self, button=None, event=None):
         """"  Returns True to prevent the popover menu from closing. """
+        if self._category_name_entry.get_visible():
+            self._category_name_entry.set_visible(False)
+            return True
+
         self.update_active_option_elements(False)
         self._category_combo_box.set_sensitive(True)
 

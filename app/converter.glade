@@ -80,6 +80,7 @@ Author: Dmitriy Yefremov
         <property name="spacing">2</property>
         <child>
           <object class="GtkModelButton">
+            <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="text" translatable="yes">Add</property>
@@ -94,9 +95,10 @@ Author: Dmitriy Yefremov
         </child>
         <child>
           <object class="GtkModelButton">
+            <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="text" translatable="yes">Edit</property>
+            <property name="text" translatable="yes">Rename</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_category_edit" swapped="no"/>
           </object>
@@ -108,6 +110,7 @@ Author: Dmitriy Yefremov
         </child>
         <child>
           <object class="GtkSeparator">
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
           <packing>
@@ -390,10 +393,22 @@ Author: Dmitriy Yefremov
           </packing>
         </child>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="category_main_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">1</property>
+            <child>
+              <object class="GtkEntry" id="category_name_entry">
+                <property name="can_focus">True</property>
+                <property name="primary_icon_stock">gtk-edit</property>
+                <property name="placeholder_text" translatable="yes">Name</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkComboBoxText" id="category_combo_box">
                 <property name="visible">True</property>
@@ -406,7 +421,7 @@ Author: Dmitriy Yefremov
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -423,7 +438,7 @@ Author: Dmitriy Yefremov
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
@@ -443,7 +458,7 @@ Author: Dmitriy Yefremov
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <child>
@@ -484,7 +499,7 @@ Author: Dmitriy Yefremov
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">3</property>
+            <property name="position">4</property>
           </packing>
         </child>
         <child>
@@ -535,9 +550,7 @@ Author: Dmitriy Yefremov
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="primary_icon_stock">gtk-edit</property>
-                <property name="placeholder_text" translatable="yes">Your parameters, excluding input
-                                    and output file
-                                </property>
+                <property name="placeholder_text" translatable="yes">Your parameters, excluding input and output file                                </property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -574,7 +587,7 @@ Author: Dmitriy Yefremov
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">4</property>
+            <property name="position">5</property>
           </packing>
         </child>
         <child>
@@ -845,8 +858,8 @@ Author: Dmitriy Yefremov
                 <property name="stock">gtk-add</property>
               </object>
             </child>
-            <accelerator key="Insert" signal="clicked"/>
             <accelerator key="i" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
+            <accelerator key="Insert" signal="clicked"/>
           </object>
           <packing>
             <property name="position">1</property>
