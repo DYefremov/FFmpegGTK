@@ -16,7 +16,7 @@ from app.commons import Presets, AppConfig, FFmpeg
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio, GLib, Gdk
 
-UI_RESOURCES_PATH = "app/" if os.path.exists("app/") else "/usr/share/ffmpeggtk/app/ui/"
+UI_RESOURCES_PATH = "app/" if os.path.exists("app/") else "/usr/share/ffmpeggtk/app/"
 
 IS_GNOME_SESSION = int(bool(os.environ.get("GNOME_DESKTOP_SESSION_ID")))
 
@@ -24,7 +24,7 @@ DURATION_PATTERN = re.compile(r"(.*Duration:)?.*(\d{2}):(\d{2}):(\d{2}.\d{2}).*"
 
 # translation
 TEXT_DOMAIN = "ffmpeg-gtk"
-if UI_RESOURCES_PATH == "":
+if UI_RESOURCES_PATH == "app/":
     LANG_DIR = UI_RESOURCES_PATH + "lang"
     locale.bindtextdomain(TEXT_DOMAIN, UI_RESOURCES_PATH + "lang")
 

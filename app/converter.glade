@@ -550,7 +550,7 @@ Author: Dmitriy Yefremov
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="primary_icon_stock">gtk-edit</property>
-                <property name="placeholder_text" translatable="yes">Your parameters, excluding input and output file                                </property>
+                <property name="placeholder_text" translatable="yes">Your parameters, excluding input and output file                       </property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -684,8 +684,7 @@ Author: Dmitriy Yefremov
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">end</property>
-                    <property name="label" translatable="yes">Overwrite the output file if exists
-                                        </property>
+                    <property name="label" translatable="yes">Overwrite existing files</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -858,8 +857,8 @@ Author: Dmitriy Yefremov
                 <property name="stock">gtk-add</property>
               </object>
             </child>
-            <accelerator key="i" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
             <accelerator key="Insert" signal="clicked"/>
+            <accelerator key="i" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
           </object>
           <packing>
             <property name="position">1</property>
