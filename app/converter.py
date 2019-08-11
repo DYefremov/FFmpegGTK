@@ -29,6 +29,10 @@ if UI_RESOURCES_PATH == "app/":
     locale.bindtextdomain(TEXT_DOMAIN, UI_RESOURCES_PATH + "lang")
 
 
+def get_localized_message(message):
+    return locale.dgettext(TEXT_DOMAIN, message)
+
+
 class Column(IntEnum):
     """ Column nums in the view """
     ICON = 0
@@ -132,7 +136,6 @@ class Application(Gtk.Application):
         self._output_folder_chooser = builder.get_object("output_folder_chooser")
         self._overwrite_if_exists_switch = builder.get_object("overwrite_if_exists_switch")
         self._convert_button = builder.get_object("convert_button")
-        self._cancel_button = builder.get_object("cancel_button")
         self._add_files_button = builder.get_object("add_files_button")
         self._add_files_main_menu_button = builder.get_object("add_files_main_menu_button")
         self._count_label = builder.get_object("count_label")
@@ -166,6 +169,12 @@ class Application(Gtk.Application):
         self._profile_combo_box.bind_property("visible", profile_label, "visible")
         self._profile_combo_box.bind_property("visible", category_menu_button, "visible")
         self._profile_combo_box.bind_property("visible", builder.get_object("profile_menu_button"), "visible")
+        # Header bar
+        self._convert_button.bind_property("visible", builder.get_object("cancel_button"), "visible", 4)
+        self._convert_button.bind_property("visible", builder.get_object("options_menu_button"), "sensitive")
+        self._convert_button.bind_property("visible", builder.get_object("add_files_button"), "sensitive")
+        self._convert_button.bind_property("visible", builder.get_object("add_files_main_menu_button"), "sensitive")
+        self._convert_button.bind_property("visible", builder.get_object("remove_popup_item"), "sensitive")
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
@@ -266,6 +275,11 @@ class Application(Gtk.Application):
             selected = self._files_model.get_value(itr, Column.SELECTED)
             self._files_model.set_value(itr, Column.SELECTED, not selected)
         elif key_value in (Gdk.KEY_Delete, Gdk.KEY_KP_Delete):
+            if self._in_progress:
+                msg = "This operation is not allowed during the conversion process!"
+                self.show_info_message(msg, Gtk.MessageType.ERROR)
+                return
+
             self.on_remove()
 
     def on_info_bar_close(self, bar, resp=None):
@@ -321,7 +335,7 @@ class Application(Gtk.Application):
         # option to overwrite output file if exists
         overwrite = "-y" if self._overwrite_if_exists_switch.get_state() else "-n"
 
-        for row in filter(lambda r: r[Column.SELECTED], self._files_model):
+        for index, row in enumerate(self._files_model):
             in_file = row[Column.FILE]
             in_path = Path(in_file)
             out_path = str(in_path.parent) + os.sep if use_source_folder else base_path + os.sep
@@ -330,7 +344,7 @@ class Application(Gtk.Application):
             if in_file == out_file:
                 out_file = "{}CONVERTED!_{}.{}".format(out_path, in_path.stem, extension)
 
-            commands.append((["ffmpeg", "-i", in_file, *opts, overwrite, out_file], row.iter))
+            commands.append((["ffmpeg", "-i", in_file, *opts, overwrite, out_file], index))
 
         self.convert(commands)
 
@@ -340,9 +354,17 @@ class Application(Gtk.Application):
             self.update_active_buttons(False)
             self._in_progress = True
 
-            for command, itr in commands:
+            for command, path in commands:
                 if not self._in_progress:
                     break
+
+                try:
+                    itr = self._files_model.get_iter(path)
+                except ValueError:
+                    continue
+
+                if not self._files_model.get_value(itr, Column.SELECTED):
+                    continue
 
                 self._current_process = subprocess.Popen(command,
                                                          stdout=subprocess.PIPE,
@@ -565,12 +587,11 @@ class Application(Gtk.Application):
     def show_info_message(self, text, message_type):
         self._info_bar.set_visible(True)
         self._info_bar.set_message_type(message_type)
-        self._info_bar_message_label.set_text(text)
+        self._info_bar_message_label.set_text(get_localized_message(text))
 
     @run_idle
     def update_active_buttons(self, active):
         self._convert_button.set_visible(active)
-        self._cancel_button.set_visible(not active)
 
     def update_active_option_elements(self, active):
         self._profile_box.set_visible(active)

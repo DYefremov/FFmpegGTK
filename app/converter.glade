@@ -37,7 +37,7 @@ Author: Dmitriy Yefremov
     <property name="skip_pager_hint">True</property>
     <property name="gravity">center</property>
     <property name="program_name">FFmpegGTK</property>
-    <property name="version">0.0.2 Pre-alpha</property>
+    <property name="version">0.0.3 Pre-alpha</property>
     <property name="copyright" translatable="yes">2019 Dmitriy Yefremov</property>
     <property name="comments" translatable="yes">Very simple GTK+ frontend for FFmpeg.</property>
     <property name="authors">Dmitriy Yefremov</property>
@@ -1073,8 +1073,10 @@ Author: Dmitriy Yefremov
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="editable">False</property>
+                        <property name="wrap_mode">word</property>
                         <property name="left_margin">5</property>
                         <property name="right_margin">5</property>
+                        <property name="indent">5</property>
                         <property name="buffer">details_text_buffer</property>
                         <property name="overwrite">True</property>
                       </object>
