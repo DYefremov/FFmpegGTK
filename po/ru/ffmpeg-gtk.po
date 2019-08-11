@@ -25,6 +25,12 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
+msgid "File"
+msgstr "Файл"
+
+msgid "Options"
+msgstr "Опции"
+
 msgid "Add"
 msgstr "Добавить"
 
@@ -38,7 +44,7 @@ msgid "Remove"
 msgstr "Удалить"
 
 msgid "Restore Defaults"
-msgstr "Восстановить значения по умолчанию"
+msgstr "Восстановить по умолчанию"
 
 msgid "Add files to the list"
 msgstr "Добавить файлы в список"
@@ -68,7 +74,7 @@ msgid "Output folder:"
 msgstr "Папка вывода:"
 
 msgid "Use source folder"
-msgstr "Использовать исходную папку"
+msgstr "Использовать исходную"
 
 msgid "Overwrite existing files"
 msgstr "Перезаписывать существующие файлы"
@@ -99,3 +105,41 @@ msgstr "Показать детали вывода"
 
 msgid "Very simple GTK+ frontend for FFmpeg."
 msgstr "Очень простой GTK + интерфейс для FFmpeg."
+
+msgid "Check if FFmpeg is installed!"
+msgstr "Проверьте, установлен ли FFmpeg!"
+
+msgid "This operation is not allowed during the conversion process!"
+msgstr "В процессе конвертации данная операция не разрешена!"
+
+msgid "Error. Check the settings!"
+msgstr "Ошибка. Проверьте настройки!"
+
+msgid "Error. Output folder is not set!"
+msgstr "Ошибка. Не задана папка вывода!"
+
+msgid "Done!"
+msgstr "Готово!"
+
+msgid "Are you sure?"
+msgstr "Вы уверены?"
+
+msgid "Task canceled."
+msgstr "Задача отменена."
+
+msgid "No category selected!"
+msgstr "Не выбрана категория!"
+
+msgid "No profile selected!"
+msgstr "Не выбран профиль!"
+
+msgid "Category with this name already exists!"
+msgstr "Категория с таким названием уже существует!"
+
+msgid "Profile successfully added!"
+msgstr "Профиль успешно добавлен!"
+
+
+
+
+

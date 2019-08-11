@@ -182,7 +182,8 @@ class Application(Gtk.Application):
         try:
             subprocess.check_output(["ffprobe", "-help"], stderr=subprocess.STDOUT)
         except FileNotFoundError as e:
-            self.show_info_message("Error. {} {}".format(e, "Check if FFmpeg is installed!"), Gtk.MessageType.ERROR)
+            msg = get_localized_message("Check if FFmpeg is installed!")
+            self.show_info_message("Error. {} {}".format(e, msg), Gtk.MessageType.ERROR)
             self._add_files_button.set_sensitive(False)
             self._add_files_main_menu_button.set_sensitive(False)
 
@@ -388,7 +389,7 @@ class Application(Gtk.Application):
     def on_cancel(self, item=None):
         dialog = Gtk.MessageDialog(self._main_window, True, Gtk.MessageType.QUESTION,
                                    (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK),
-                                   "Are you sure?")
+                                   get_localized_message("Are you sure?"))
         is_ok = dialog.run() == Gtk.ResponseType.OK
         if is_ok:
             self._in_progress = False
