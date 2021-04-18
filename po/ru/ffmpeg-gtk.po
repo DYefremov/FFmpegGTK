@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitriy Yefremov
+# Copyright (C) 2019-2021 Dmitriy Yefremov
 #
 # This file is part of FFmpegGTK.
 #
@@ -46,8 +46,8 @@ msgstr "Удалить"
 msgid "Restore Defaults"
 msgstr "Восстановить по умолчанию"
 
-msgid "Add files to the list"
-msgstr "Добавить файлы в список"
+msgid "Add files"
+msgstr "Добавить файл(ы)"
 
 msgid "About"
 msgstr "О программе"
@@ -97,14 +97,23 @@ msgstr "Отмена"
 msgid "Convert"
 msgstr "Конвертировать"
 
+msgid "Crop"
+msgstr "Обрезать"
+
+msgid "Start"
+msgstr "Начало"
+
+msgid "End"
+msgstr "Конец"
+
 msgid "Output details"
 msgstr "Детали вывода"
 
 msgid "Show output details"
 msgstr "Показать детали вывода"
 
-msgid "Very simple GTK+ frontend for FFmpeg."
-msgstr "Очень простой GTK + интерфейс для FFmpeg."
+msgid "Simple GTK+ frontend for FFmpeg."
+msgstr "Простой GTK + интерфейс для FFmpeg."
 
 msgid "Check if FFmpeg is installed!"
 msgstr "Проверьте, установлен ли FFmpeg!"
@@ -133,13 +142,11 @@ msgstr "Не выбрана категория!"
 msgid "No profile selected!"
 msgstr "Не выбран профиль!"
 
+msgid "No file selected!"
+msgstr "Не выбран файл!"
+
 msgid "Category with this name already exists!"
 msgstr "Категория с таким названием уже существует!"
 
 msgid "Profile successfully added!"
 msgstr "Профиль успешно добавлен!"
-
-
-
-
-

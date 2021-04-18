@@ -1,3 +1,26 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2019-2021 Dmitriy Yefremov
+#
+# This file is part of FFmpegGTK.
+#
+# FFmpegGTK is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# FFmpegGTK is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with FFmpegGTK.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Author: Dmitriy Yefremov
+#
+
+
 import json
 import os
 import pathlib
@@ -98,6 +121,16 @@ class FFmpeg:
         else:
             return json.loads(str(md, errors="replace")).get("format", {})
         return {}
+
+    @staticmethod
+    def get_image_data(path, pos):
+        try:
+            md = subprocess.check_output(["ffmpeg", "-ss", pos, "-i", path, "-v", "quiet", "-frames:v", "1",
+                                          "-s", "360x240", "-f", "image2", "pipe: | cat"])
+        except subprocess.CalledProcessError as e:
+            print(e)
+        else:
+            return md
 
 
 if __name__ == "__main__":
