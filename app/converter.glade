@@ -1136,12 +1136,12 @@ Author: Dmitriy Yefremov
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Drag the file here </property>
                             <child>
-                              <object class="GtkImage" id="crop_start_image">
+                              <object class="GtkDrawingArea" id="crop_start_area">
                                 <property name="width_request">320</property>
                                 <property name="height_request">240</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-missing-image</property>
+                                <signal name="draw" handler="on_crop_start_draw" swapped="no"/>
                               </object>
                             </child>
                           </object>
@@ -1197,12 +1197,12 @@ Author: Dmitriy Yefremov
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkImage" id="crop_end_image">
+                              <object class="GtkDrawingArea" id="crop_end_area">
                                 <property name="width_request">320</property>
                                 <property name="height_request">240</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-missing-image</property>
+                                <signal name="draw" handler="on_crop_end_draw" swapped="no"/>
                               </object>
                             </child>
                           </object>

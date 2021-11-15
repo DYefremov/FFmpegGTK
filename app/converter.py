@@ -120,6 +120,8 @@ class Application(Gtk.Application):
                     "on_about": self.on_about,
                     "on_exit": self.on_exit,
                     "on_resize": self.on_resize,
+                    "on_crop_start_draw": self.on_crop_start_draw,
+                    "on_crop_end_draw": self.on_crop_end_draw,
                     "on_execute": self.on_execute,
                     "on_cancel": self.on_cancel,
                     "on_query_tooltip": self.on_query_tooltip,
@@ -145,6 +147,9 @@ class Application(Gtk.Application):
         self._current_itr = None
         self._current_crop_file = None
         self._crop_is_video = False
+
+        self._crop_start_image = None
+        self._crop_end_image = None
 
         builder = Gtk.Builder()
         builder.set_translation_domain(TEXT_DOMAIN)
@@ -215,8 +220,8 @@ class Application(Gtk.Application):
         # Crop
         self._crop_start_scale = builder.get_object("crop_start_scale")
         self._crop_end_scale = builder.get_object("crop_end_scale")
-        self._crop_start_image = builder.get_object("crop_start_image")
-        self._crop_end_image = builder.get_object("crop_end_image")
+        self._crop_start_area = builder.get_object("crop_start_area")
+        self._crop_end_area = builder.get_object("crop_end_area")
         self._crop_box = builder.get_object("crop_box")
         self._crop_box.bind_property("sensitive", profile_main_box, "visible", 4)
         self._crop_box.bind_property("sensitive", profile_label, "visible", 4)
@@ -498,11 +503,15 @@ class Application(Gtk.Application):
                 if mime:
                     self._crop_is_video = "video" in mime
                     if self._crop_is_video:
-                        self._crop_end_image.set_from_pixbuf(self.get_crop_pixbuf(self._current_crop_file, duration))
-                        self._crop_start_image.set_from_pixbuf(self.get_crop_pixbuf(self._current_crop_file, 0))
+                        self._crop_end_image = self.get_crop_pixbuf(self._current_crop_file, duration)
+                        self._crop_start_image = self.get_crop_pixbuf(self._current_crop_file, 0)
                     else:
-                        self._crop_end_image.set_from_pixbuf(self._mime_icon_audio)
-                        self._crop_start_image.set_from_pixbuf(self._mime_icon_audio)
+                        theme = Gtk.IconTheme.get_default()
+                        icon = None
+                        if theme.lookup_icon("audio-x-generic", 256, 0):
+                            icon = theme.load_icon("audio-x-generic", 256, 0)
+
+                        self._crop_end_image = self._crop_start_image = icon
 
         GLib.idle_add(dialog.destroy)
 
@@ -524,14 +533,29 @@ class Application(Gtk.Application):
         self._crop_end_scale.clear_marks()
         self._crop_end_scale.add_mark(t_pos, Gtk.PositionType.BOTTOM, "START")
         if self._crop_is_video:
-            self._crop_start_image.set_from_pixbuf(self.get_crop_pixbuf(self._current_crop_file, t_pos))
+            self._crop_start_image = self.get_crop_pixbuf(self._current_crop_file, t_pos)
 
     def on_crop_end_changed(self, scale):
         t_pos = scale.get_value()
         self._crop_start_scale.clear_marks()
         self._crop_start_scale.add_mark(t_pos, Gtk.PositionType.BOTTOM, "END")
         if self._crop_is_video:
-            self._crop_end_image.set_from_pixbuf(self.get_crop_pixbuf(self._current_crop_file, t_pos))
+            self._crop_end_image = self.get_crop_pixbuf(self._current_crop_file, t_pos)
+
+    def on_crop_start_draw(self, area, cr):
+        """ Called to automatically resize crop start image. """
+        self.crop_resize(area, cr, self._crop_start_image)
+
+    def on_crop_end_draw(self, area, cr):
+        """ Called to automatically resize crop end image. """
+        self.crop_resize(area, cr, self._crop_end_image)
+
+    def crop_resize(self, area, cr, pix):
+        """ Resizes pixbuf for given area. """
+        if pix:
+            cr.scale(area.get_allocated_width() / pix.get_width(), area.get_allocated_height() / pix.get_height())
+            cr.set_source_surface(Gdk.cairo_surface_create_from_pixbuf(pix, 1, None), 0, 0)
+            cr.paint()
 
     def do_crop(self, base_path, use_source_folder=True):
         if not self._current_crop_file:
