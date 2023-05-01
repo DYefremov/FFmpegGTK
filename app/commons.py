@@ -22,6 +22,7 @@
 
 
 import json
+import logging
 import os
 import pathlib
 import subprocess
@@ -33,6 +34,27 @@ from threading import Thread
 from xml.dom.minidom import parse, Node
 
 from gi.repository import GLib
+
+_LOG_FILE = "FFmpegGTK.log"
+LOG_DATE_FORMAT = "%d-%m-%y %H:%M:%S"
+LOGGER_NAME = "main_logger"
+LOG_FORMAT = "%(asctime)s %(message)s"
+
+
+def init_logger():
+    logging.Logger(LOGGER_NAME)
+    handlers = [logging.FileHandler(_LOG_FILE), logging.StreamHandler()]
+    logging.basicConfig(level=logging.INFO,
+                        format=LOG_FORMAT,
+                        datefmt=LOG_DATE_FORMAT,
+                        handlers=handlers)
+    log("Logging enabled.", level=logging.INFO)
+
+
+def log(message, level=logging.ERROR):
+    """ The main logging function. """
+    logger = logging.getLogger(LOGGER_NAME)
+    logger.log(level, message)
 
 
 def run_task(func):
@@ -54,14 +76,6 @@ def run_idle(func):
         GLib.idle_add(func, *args, **kwargs)
 
     return wrapper
-
-
-def init_logger():
-    print("init log test")
-
-
-def log(message):
-    print(message)
 
 
 class AppConfig(dict):
