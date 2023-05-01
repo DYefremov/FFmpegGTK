@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 
+<!-- Generated with glade 3.38.2 
 
-Copyright (C) 2019-2021 Dmitriy Yefremov
+Copyright (C) 2019-2023 Dmitriy Yefremov
 
 This file is part of FFmpegGTK.
 
@@ -21,41 +21,38 @@ along with FFmpegGTK.  If not, see <http://www.gnu.org/licenses/>.
 Author: Dmitriy Yefremov
 
 -->
-<interface>
-  <requires lib="gtk+" version="3.16"/>
+<interface domain="ffmpeg-gtk">
+  <requires lib="gtk+" version="3.22"/>
   <!-- interface-license-type gplv3 -->
   <!-- interface-name FFmpegGTK -->
   <!-- interface-description Very simple GUI frontend for FFmpeg. -->
-  <!-- interface-copyright 2019-2021 Dmitriy Yefremov -->
+  <!-- interface-copyright 2019-2023 Dmitriy Yefremov -->
   <!-- interface-authors Dmitriy Yefremov -->
   <object class="GtkAboutDialog" id="about_dialog">
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_pager_hint">True</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="destroy-with-parent">True</property>
+    <property name="type-hint">dialog</property>
+    <property name="skip-pager-hint">True</property>
     <property name="gravity">center</property>
-    <property name="program_name">FFmpegGTK</property>
+    <property name="program-name">FFmpegGTK</property>
     <property name="version">0.0.4 Pre-Alpha</property>
-    <property name="copyright" translatable="yes">2019-2021 Dmitriy Yefremov</property>
+    <property name="copyright" translatable="yes">2019-2023 Dmitriy Yefremov</property>
     <property name="comments" translatable="yes">Simple GTK+ frontend for FFmpeg.</property>
     <property name="authors">Dmitriy Yefremov</property>
-    <property name="translator_credits" translatable="yes">translator-credits</property>
+    <property name="translator-credits" translatable="yes">translator-credits</property>
     <property name="logo">img/logo.png</property>
-    <property name="license_type">gpl-3-0</property>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
+    <property name="license-type">gpl-3-0</property>
     <child internal-child="vbox">
       <object class="GtkBox">
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -67,22 +64,22 @@ Author: Dmitriy Yefremov
     </child>
   </object>
   <object class="GtkPopoverMenu" id="category_popover_menu">
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_left">10</property>
-        <property name="margin_right">10</property>
-        <property name="margin_top">5</property>
-        <property name="margin_bottom">5</property>
+        <property name="can-focus">False</property>
+        <property name="margin-left">10</property>
+        <property name="margin-right">10</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">5</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Add</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_category_add" swapped="no"/>
@@ -96,8 +93,8 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Rename</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_category_edit" swapped="no"/>
@@ -111,7 +108,7 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkSeparator">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -122,8 +119,8 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Restore Defaults</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_category_restore_defaults" swapped="no"/>
@@ -137,7 +134,7 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkSeparator">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -148,8 +145,8 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Remove</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_category_remove" swapped="no"/>
@@ -170,8 +167,8 @@ Author: Dmitriy Yefremov
   <object class="GtkTextBuffer" id="details_text_buffer"/>
   <object class="GtkAdjustment" id="end_adjustment">
     <property name="upper">100</property>
-    <property name="step_increment">0.01</property>
-    <property name="page_increment">1</property>
+    <property name="step-increment">0.01</property>
+    <property name="page-increment">1</property>
   </object>
   <object class="GtkFileFilter" id="file_filter">
     <mime-types>
@@ -221,22 +218,22 @@ Author: Dmitriy Yefremov
     <signal name="row-inserted" handler="on_file_model_changed" swapped="no"/>
   </object>
   <object class="GtkPopoverMenu" id="main_menu">
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <child>
       <object class="GtkBox" id="main_menu_box">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_left">10</property>
-        <property name="margin_right">10</property>
-        <property name="margin_top">5</property>
-        <property name="margin_bottom">5</property>
+        <property name="can-focus">False</property>
+        <property name="margin-left">10</property>
+        <property name="margin-right">10</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">5</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkModelButton" id="add_files_main_menu_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Add files</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_add_files" swapped="no"/>
@@ -250,7 +247,7 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkSeparator">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -261,8 +258,8 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkModelButton" id="about_main_menu_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">About</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_about" swapped="no"/>
@@ -276,8 +273,8 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkModelButton" id="exit_main_menu_button">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Exit</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_exit" swapped="no"/>
@@ -296,24 +293,24 @@ Author: Dmitriy Yefremov
     </child>
   </object>
   <object class="GtkPopoverMenu" id="profile_popover_menu">
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="position">bottom</property>
-    <property name="transitions_enabled">False</property>
+    <property name="transitions-enabled">False</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_left">10</property>
-        <property name="margin_right">10</property>
-        <property name="margin_top">5</property>
-        <property name="margin_bottom">5</property>
+        <property name="can-focus">False</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">5</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Add</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_profile_add" swapped="no"/>
@@ -327,8 +324,8 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Edit</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_profile_edit" swapped="no"/>
@@ -342,7 +339,7 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkSeparator">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -353,8 +350,8 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
             <property name="text" translatable="yes">Remove</property>
             <property name="centered">True</property>
             <signal name="clicked" handler="on_profile_remove" swapped="no"/>
@@ -373,21 +370,21 @@ Author: Dmitriy Yefremov
     </child>
   </object>
   <object class="GtkPopoverMenu" id="options_menu">
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <child>
       <object class="GtkBox" id="main_popover_box">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_left">10</property>
-        <property name="margin_right">10</property>
-        <property name="margin_top">5</property>
-        <property name="margin_bottom">5</property>
+        <property name="can-focus">False</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">5</property>
         <property name="orientation">vertical</property>
         <property name="spacing">5</property>
         <child>
           <object class="GtkLabel" id="category_label">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="label" translatable="yes">Category:</property>
           </object>
@@ -400,13 +397,13 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkBox" id="category_main_box">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="spacing">1</property>
             <child>
               <object class="GtkEntry" id="category_name_entry">
-                <property name="can_focus">True</property>
-                <property name="primary_icon_stock">gtk-edit</property>
-                <property name="placeholder_text" translatable="yes">Name</property>
+                <property name="can-focus">True</property>
+                <property name="primary-icon-stock">gtk-edit</property>
+                <property name="placeholder-text" translatable="yes">Name</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -417,8 +414,8 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkComboBoxText" id="category_combo_box">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">Convert to</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Convert to</property>
                 <property name="hexpand">False</property>
                 <signal name="changed" handler="on_category_changed" swapped="no"/>
                 <signal name="changed" handler="on_info_bar_close" object="info_bar" swapped="no"/>
@@ -432,8 +429,8 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkMenuButton" id="category_menu_button">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
                 <property name="direction">none</property>
                 <property name="popover">category_popover_menu</property>
                 <child>
@@ -456,7 +453,7 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkLabel" id="profile_label">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="label" translatable="yes">Profile:</property>
           </object>
@@ -469,12 +466,12 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkBox" id="profile_main_box">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="spacing">1</property>
             <child>
               <object class="GtkComboBoxText" id="profile_combo_box">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <signal name="changed" handler="on_info_bar_close" object="info_bar" swapped="no"/>
               </object>
               <packing>
@@ -486,8 +483,8 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkMenuButton" id="profile_menu_button">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
                 <property name="direction">none</property>
                 <property name="popover">profile_popover_menu</property>
                 <child>
@@ -509,13 +506,13 @@ Author: Dmitriy Yefremov
         </child>
         <child>
           <object class="GtkBox" id="profile_box">
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
             <property name="spacing">5</property>
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Profile name:</property>
               </object>
               <packing>
@@ -527,9 +524,9 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkEntry" id="profile_name_entry">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="primary_icon_stock">gtk-edit</property>
-                <property name="placeholder_text" translatable="yes">Name</property>
+                <property name="can-focus">True</property>
+                <property name="primary-icon-stock">gtk-edit</property>
+                <property name="placeholder-text" translatable="yes">Name</property>
                 <signal name="changed" handler="on_info_bar_close" object="info_bar" swapped="no"/>
               </object>
               <packing>
@@ -541,7 +538,7 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Command line parameters:</property>
               </object>
               <packing>
@@ -553,9 +550,9 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkEntry" id="profile_params_entry">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="primary_icon_stock">gtk-edit</property>
-                <property name="placeholder_text" translatable="yes">Your parameters, excluding input and output file                       </property>
+                <property name="can-focus">True</property>
+                <property name="primary-icon-stock">gtk-edit</property>
+                <property name="placeholder-text" translatable="yes">Your parameters, excluding input and output file                       </property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -566,7 +563,7 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Output file extension:</property>
               </object>
               <packing>
@@ -578,9 +575,9 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkEntry" id="profile_extension_entry">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="primary_icon_stock">gtk-edit</property>
-                <property name="placeholder_text" translatable="yes">avi, mp4, mp3 etc.</property>
+                <property name="can-focus">True</property>
+                <property name="primary-icon-stock">gtk-edit</property>
+                <property name="placeholder-text" translatable="yes">avi, mp4, mp3 etc.</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -598,15 +595,15 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkBox" id="output_main_box">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
             <property name="spacing">5</property>
             <child>
               <object class="GtkSeparator" id="options_separator">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">5</property>
+                <property name="margin-bottom">5</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -617,14 +614,14 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkBox" id="output_folder_box">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="spacing">5</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="halign">center</property>
-                    <property name="margin_left">5</property>
+                    <property name="margin-left">5</property>
                     <property name="label" translatable="yes">Output folder:</property>
                   </object>
                   <packing>
@@ -636,7 +633,7 @@ Author: Dmitriy Yefremov
                 <child>
                   <object class="GtkFileChooserButton" id="output_folder_chooser">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="action">select-folder</property>
                     <property name="title" translatable="yes"/>
                   </object>
@@ -649,7 +646,7 @@ Author: Dmitriy Yefremov
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="label" translatable="yes">Use source folder</property>
                   </object>
@@ -662,13 +659,13 @@ Author: Dmitriy Yefremov
                 <child>
                   <object class="GtkSwitch" id="use_source_folder_switch">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can-focus">True</property>
                     <signal name="state-set" handler="on_source_state_set" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="pack_type">end</property>
+                    <property name="pack-type">end</property>
                     <property name="position">3</property>
                   </packing>
                 </child>
@@ -682,12 +679,12 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkBox" id="overwrite_option_box">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="spacing">5</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="halign">end</property>
                     <property name="label" translatable="yes">Overwrite existing files</property>
                   </object>
@@ -700,12 +697,12 @@ Author: Dmitriy Yefremov
                 <child>
                   <object class="GtkSwitch" id="overwrite_if_exists_switch">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can-focus">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="pack_type">end</property>
+                    <property name="pack-type">end</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -719,9 +716,9 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkSeparator" id="options_separator_2">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">5</property>
+                <property name="margin-bottom">5</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -739,13 +736,13 @@ Author: Dmitriy Yefremov
         <child>
           <object class="GtkBox" id="action_buttons_box">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="spacing">5</property>
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkModelButton" id="options_cancel_button">
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
                 <property name="text" translatable="yes">Cancel</property>
                 <property name="centered">True</property>
                 <signal name="button-press-event" handler="on_options_cancel" swapped="no"/>
@@ -759,8 +756,8 @@ Author: Dmitriy Yefremov
             </child>
             <child>
               <object class="GtkModelButton" id="options_apply_button">
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
                 <property name="text" translatable="yes">Apply</property>
                 <property name="centered">True</property>
                 <signal name="button-press-event" handler="on_options_apply" swapped="no"/>
@@ -774,8 +771,8 @@ Author: Dmitriy Yefremov
             </child>
             <child>
               <object class="GtkModelButton" id="options_add_button">
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
                 <property name="text" translatable="yes">Add</property>
                 <property name="centered">True</property>
                 <signal name="button-press-event" handler="on_options_add" swapped="no"/>
@@ -790,8 +787,8 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkModelButton" id="options_ok_button">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
                 <property name="text" translatable="yes">OK</property>
                 <property name="centered">True</property>
               </object>
@@ -817,19 +814,19 @@ Author: Dmitriy Yefremov
   </object>
   <object class="GtkImage" id="remove_selection_image">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">edit-undo</property>
+    <property name="can-focus">False</property>
+    <property name="icon-name">edit-undo</property>
   </object>
   <object class="GtkMenu" id="main_popup_menu">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <child>
       <object class="GtkImageMenuItem" id="select_all_popup_item">
         <property name="label">gtk-select-all</property>
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="use_underline">True</property>
-        <property name="use_stock">True</property>
+        <property name="can-focus">False</property>
+        <property name="use-underline">True</property>
+        <property name="use-stock">True</property>
         <signal name="activate" handler="on_select_all" object="file_tree_view" swapped="no"/>
         <accelerator key="a" signal="activate" modifiers="GDK_CONTROL_MASK"/>
       </object>
@@ -838,25 +835,25 @@ Author: Dmitriy Yefremov
       <object class="GtkImageMenuItem" id="unselect_popup_item">
         <property name="label" translatable="yes">Remove selection</property>
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="image">remove_selection_image</property>
-        <property name="use_stock">False</property>
+        <property name="use-stock">False</property>
         <signal name="activate" handler="on_unselect" swapped="no"/>
       </object>
     </child>
     <child>
       <object class="GtkSeparatorMenuItem" id="separator_popup_item">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
       </object>
     </child>
     <child>
       <object class="GtkImageMenuItem" id="remove_popup_item">
         <property name="label">gtk-remove</property>
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="use_underline">True</property>
-        <property name="use_stock">True</property>
+        <property name="can-focus">False</property>
+        <property name="use-underline">True</property>
+        <property name="use-stock">True</property>
         <signal name="activate" handler="on_remove" swapped="no"/>
         <accelerator key="Delete" signal="activate"/>
       </object>
@@ -864,169 +861,50 @@ Author: Dmitriy Yefremov
   </object>
   <object class="GtkAdjustment" id="start_adjustment">
     <property name="upper">100</property>
-    <property name="step_increment">0.01</property>
-    <property name="page_increment">1</property>
+    <property name="step-increment">0.01</property>
+    <property name="page-increment">1</property>
   </object>
   <object class="GtkApplicationWindow" id="main_window">
-    <property name="can_focus">False</property>
-    <property name="window_position">center</property>
-    <property name="default_width">560</property>
-    <property name="default_height">480</property>
+    <property name="can-focus">False</property>
+    <property name="window-position">center</property>
+    <property name="default-width">560</property>
+    <property name="default-height">480</property>
     <property name="icon">img/logo.png</property>
     <property name="gravity">center</property>
     <signal name="check-resize" handler="on_resize" swapped="no"/>
     <signal name="delete-event" handler="on_exit" swapped="no"/>
-    <child type="titlebar">
-      <object class="GtkHeaderBar" id="header_bar">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="title">FFmpegGTK</property>
-        <property name="show_close_button">True</property>
-        <child>
-          <object class="GtkMenuButton" id="file_menu_button">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">File</property>
-            <property name="popover">main_menu</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">find-location-symbolic</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="add_files_button">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Add files</property>
-            <signal name="clicked" handler="on_add_files" swapped="no"/>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="stock">gtk-add</property>
-              </object>
-            </child>
-            <accelerator key="Insert" signal="clicked"/>
-            <accelerator key="i" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
-          </object>
-          <packing>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-          </object>
-          <packing>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="cancel_button">
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Cancel</property>
-            <signal name="clicked" handler="on_cancel" swapped="no"/>
-            <child>
-              <object class="GtkImage" id="cancel_button_image">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="stock">gtk-cancel</property>
-              </object>
-            </child>
-            <accelerator key="z" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-          </object>
-          <packing>
-            <property name="position">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="convert_button">
-            <property name="label">gtk-execute</property>
-            <property name="visible">True</property>
-            <property name="sensitive">False</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_stock">True</property>
-            <property name="always_show_image">True</property>
-            <signal name="clicked" handler="on_execute" swapped="no"/>
-            <accelerator key="x" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
-          </object>
-          <packing>
-            <property name="position">5</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkMenuButton" id="options_menu_button">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Options</property>
-            <property name="direction">none</property>
-            <property name="popover">options_menu</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkStackSwitcher" id="stack_switcher">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="stack">stack</property>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-            <property name="position">6</property>
-          </packing>
-        </child>
-      </object>
-    </child>
     <child>
       <object class="GtkBox" id="convert_box">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkPaned" id="main_paned">
             <property name="name">main_paned</property>
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
+            <property name="can-focus">True</property>
             <property name="orientation">vertical</property>
-            <property name="wide_handle">True</property>
+            <property name="wide-handle">True</property>
             <child>
               <object class="GtkStack" id="stack">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="transition_type">crossfade</property>
+                <property name="can-focus">False</property>
+                <property name="transition-type">crossfade</property>
                 <signal name="notify::visible-child" handler="on_stack_child_changed" swapped="no"/>
                 <child>
                   <object class="GtkScrolledWindow" id="main_scrolled_window">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="shadow_type">in</property>
+                    <property name="can-focus">True</property>
+                    <property name="shadow-type">in</property>
                     <child>
                       <object class="GtkTreeView" id="file_tree_view">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can-focus">True</property>
                         <property name="model">files_list_store</property>
-                        <property name="headers_visible">False</property>
+                        <property name="headers-visible">False</property>
                         <property name="reorderable">True</property>
-                        <property name="search_column">1</property>
-                        <property name="rubber_banding">True</property>
+                        <property name="search-column">1</property>
+                        <property name="rubber-banding">True</property>
                         <signal name="button-press-event" handler="on_popup_menu" object="main_popup_menu" swapped="no"/>
                         <signal name="key-press-event" handler="on_key_press" swapped="no"/>
                         <signal name="query-tooltip" handler="on_query_tooltip" swapped="no"/>
@@ -1041,7 +919,7 @@ Author: Dmitriy Yefremov
                             <property name="sizing">autosize</property>
                             <property name="title" translatable="yes">File</property>
                             <property name="expand">True</property>
-                            <property name="sort_column_id">1</property>
+                            <property name="sort-column-id">1</property>
                             <child>
                               <object class="GtkCellRendererPixbuf" id="icon_renderer">
                                 <property name="xpad">5</property>
@@ -1110,37 +988,37 @@ Author: Dmitriy Yefremov
                   <packing>
                     <property name="name">convert</property>
                     <property name="title" translatable="yes">Convert</property>
-                    <property name="icon_name">gtk-convert</property>
+                    <property name="icon-name">gtk-convert</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkBox" id="crop_box">
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="margin_right">10</property>
-                    <property name="margin_top">10</property>
-                    <property name="margin_bottom">5</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-left">10</property>
+                    <property name="margin-right">10</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-bottom">5</property>
                     <property name="spacing">10</property>
                     <property name="homogeneous">True</property>
                     <child>
                       <object class="GtkBox" id="crop_start_box">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
                           <object class="GtkViewport" id="start_viewport">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="tooltip_text" translatable="yes">Drag the file here </property>
+                            <property name="can-focus">False</property>
+                            <property name="tooltip-text" translatable="yes">Drag the file here </property>
                             <child>
                               <object class="GtkDrawingArea" id="crop_start_area">
-                                <property name="width_request">320</property>
-                                <property name="height_request">240</property>
+                                <property name="width-request">320</property>
+                                <property name="height-request">240</property>
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <signal name="draw" handler="on_crop_start_draw" swapped="no"/>
                               </object>
                             </child>
@@ -1154,7 +1032,7 @@ Author: Dmitriy Yefremov
                         <child>
                           <object class="GtkLabel" id="crop_start_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="label" translatable="yes">Start</property>
                           </object>
                           <packing>
@@ -1166,10 +1044,10 @@ Author: Dmitriy Yefremov
                         <child>
                           <object class="GtkScale" id="crop_start_scale">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
+                            <property name="can-focus">True</property>
                             <property name="adjustment">start_adjustment</property>
-                            <property name="fill_level">0</property>
-                            <property name="round_digits">0</property>
+                            <property name="fill-level">0</property>
+                            <property name="round-digits">0</property>
                             <property name="digits">0</property>
                             <signal name="value-changed" handler="on_crop_start_changed" swapped="no"/>
                           </object>
@@ -1189,19 +1067,19 @@ Author: Dmitriy Yefremov
                     <child>
                       <object class="GtkBox" id="crop_end_box">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">2</property>
                         <child>
                           <object class="GtkViewport" id="end_viewport">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <child>
                               <object class="GtkDrawingArea" id="crop_end_area">
-                                <property name="width_request">320</property>
-                                <property name="height_request">240</property>
+                                <property name="width-request">320</property>
+                                <property name="height-request">240</property>
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <signal name="draw" handler="on_crop_end_draw" swapped="no"/>
                               </object>
                             </child>
@@ -1215,7 +1093,7 @@ Author: Dmitriy Yefremov
                         <child>
                           <object class="GtkLabel" id="crop_end_label">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="label" translatable="yes">End</property>
                           </object>
                           <packing>
@@ -1227,10 +1105,10 @@ Author: Dmitriy Yefremov
                         <child>
                           <object class="GtkScale" id="crop_end_scale">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
+                            <property name="can-focus">True</property>
                             <property name="adjustment">end_adjustment</property>
-                            <property name="fill_level">0</property>
-                            <property name="round_digits">0</property>
+                            <property name="fill-level">0</property>
+                            <property name="round-digits">0</property>
                             <property name="digits">0</property>
                             <signal name="value-changed" handler="on_crop_end_changed" swapped="no"/>
                           </object>
@@ -1251,7 +1129,7 @@ Author: Dmitriy Yefremov
                   <packing>
                     <property name="name">crop</property>
                     <property name="title" translatable="yes">Crop</property>
-                    <property name="icon_name">gtk-cut</property>
+                    <property name="icon-name">gtk-cut</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -1263,12 +1141,12 @@ Author: Dmitriy Yefremov
             </child>
             <child>
               <object class="GtkBox" id="output_box">
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Output details</property>
                   </object>
                   <packing>
@@ -1280,16 +1158,16 @@ Author: Dmitriy Yefremov
                 <child>
                   <object class="GtkScrolledWindow" id="details_scrolled_window">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="shadow_type">in</property>
+                    <property name="can-focus">True</property>
+                    <property name="shadow-type">in</property>
                     <child>
                       <object class="GtkTextView" id="details_text_view">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can-focus">True</property>
                         <property name="editable">False</property>
-                        <property name="wrap_mode">word</property>
-                        <property name="left_margin">5</property>
-                        <property name="right_margin">5</property>
+                        <property name="wrap-mode">word</property>
+                        <property name="left-margin">5</property>
+                        <property name="right-margin">5</property>
                         <property name="indent">5</property>
                         <property name="buffer">details_text_buffer</property>
                         <property name="overwrite">True</property>
@@ -1317,18 +1195,18 @@ Author: Dmitriy Yefremov
         </child>
         <child>
           <object class="GtkBox" id="status_bar_box">
-            <property name="height_request">24</property>
+            <property name="height-request">24</property>
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
+            <property name="can-focus">False</property>
+            <property name="margin-left">5</property>
+            <property name="margin-right">5</property>
+            <property name="margin-top">5</property>
+            <property name="margin-bottom">5</property>
             <property name="spacing">2</property>
             <child>
               <object class="GtkImage" id="count_image">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="stock">gtk-properties</property>
               </object>
               <packing>
@@ -1340,7 +1218,7 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkLabel" id="count_label">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label">0</property>
               </object>
               <packing>
@@ -1352,7 +1230,7 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">Show output details</property>
               </object>
@@ -1365,8 +1243,8 @@ Author: Dmitriy Yefremov
             <child>
               <object class="GtkSwitch" id="show_output_switch">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="margin_right">5</property>
+                <property name="can-focus">True</property>
+                <property name="margin-right">5</property>
                 <signal name="state-set" handler="on_show_output_switch" swapped="no"/>
               </object>
               <packing>
@@ -1384,14 +1262,14 @@ Author: Dmitriy Yefremov
         </child>
         <child>
           <object class="GtkInfoBar" id="info_bar">
-            <property name="can_focus">False</property>
-            <property name="show_close_button">True</property>
+            <property name="can-focus">False</property>
+            <property name="show-close-button">True</property>
             <signal name="response" handler="on_info_bar_close" swapped="no"/>
             <child internal-child="action_area">
               <object class="GtkButtonBox">
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="spacing">6</property>
-                <property name="layout_style">end</property>
+                <property name="layout-style">end</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1401,12 +1279,12 @@ Author: Dmitriy Yefremov
             </child>
             <child internal-child="content_area">
               <object class="GtkBox">
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="spacing">16</property>
                 <child>
                   <object class="GtkLabel" id="info_bar_message_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">INFO</property>
                   </object>
                   <packing>
@@ -1430,6 +1308,125 @@ Author: Dmitriy Yefremov
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="header_bar">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="title">FFmpegGTK</property>
+        <property name="show-close-button">True</property>
+        <child>
+          <object class="GtkMenuButton" id="file_menu_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">File</property>
+            <property name="popover">main_menu</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">find-location-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="add_files_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Add files</property>
+            <signal name="clicked" handler="on_add_files" swapped="no"/>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="stock">gtk-add</property>
+              </object>
+            </child>
+            <accelerator key="i" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
+            <accelerator key="Insert" signal="clicked"/>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkMenuButton" id="options_menu_button">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Options</property>
+            <property name="direction">none</property>
+            <property name="popover">options_menu</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-left">5</property>
+            <property name="margin-right">5</property>
+          </object>
+          <packing>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="cancel_button">
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Cancel</property>
+            <signal name="clicked" handler="on_cancel" swapped="no"/>
+            <child>
+              <object class="GtkImage" id="cancel_button_image">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="stock">gtk-cancel</property>
+              </object>
+            </child>
+            <accelerator key="z" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+          </object>
+          <packing>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="convert_button">
+            <property name="label">gtk-execute</property>
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="use-stock">True</property>
+            <property name="always-show-image">True</property>
+            <signal name="clicked" handler="on_execute" swapped="no"/>
+            <accelerator key="x" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
+          </object>
+          <packing>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStackSwitcher" id="stack_switcher">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="stack">stack</property>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+            <property name="position">6</property>
           </packing>
         </child>
       </object>

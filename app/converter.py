@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # FFmpegGTK. Simple GTK+ frontend for FFmpeg.
-# Copyright (C) 2019-2021 Dmitriy Yefremov
+# Copyright (C) 2019-2023 Dmitriy Yefremov
 #
 # This file is part of FFmpegGTK.
 #
@@ -43,6 +43,8 @@ from gi.repository import Gtk, Gio, GLib, Gdk, GdkPixbuf
 
 UI_RESOURCES_PATH = "app/" if os.path.exists("app/") else "/usr/share/ffmpeggtk/app/"
 
+PRESETS_PATH = f"{UI_RESOURCES_PATH}presets.json"
+
 IS_GNOME_SESSION = int(bool(os.environ.get("GNOME_DESKTOP_SESSION_ID")))
 
 DURATION_PATTERN = re.compile(r"(.*Duration:)?.*(\d{2}):(\d{2}):(\d{2}.\d{2}).*")
@@ -50,8 +52,8 @@ DURATION_PATTERN = re.compile(r"(.*Duration:)?.*(\d{2}):(\d{2}):(\d{2}.\d{2}).*"
 # Translation
 TEXT_DOMAIN = "ffmpeg-gtk"
 if UI_RESOURCES_PATH == "app/":
-    LANG_DIR = UI_RESOURCES_PATH + "lang"
-    locale.bindtextdomain(TEXT_DOMAIN, UI_RESOURCES_PATH + "lang")
+    LANG_DIR = f"{UI_RESOURCES_PATH}lang"
+    locale.bindtextdomain(TEXT_DOMAIN, LANG_DIR)
 
 
 def get_localized_message(message):
@@ -59,7 +61,7 @@ def get_localized_message(message):
 
 
 class Column(IntEnum):
-    """ Column nums in the view """
+    """ Column nums in the view. """
     ICON = 0
     FILE = 1
     DURATION = 2
@@ -235,7 +237,7 @@ class Application(Gtk.Application):
             subprocess.check_output(["ffprobe", "-help"], stderr=subprocess.STDOUT)
         except FileNotFoundError as e:
             msg = get_localized_message("Check if FFmpeg is installed!")
-            self.show_info_message("Error. {} {}".format(e, msg), Gtk.MessageType.ERROR)
+            self.show_info_message(f"Error. {e} {msg}", Gtk.MessageType.ERROR)
             self._add_files_button.set_sensitive(False)
             self._add_files_main_menu_button.set_sensitive(False)
 
@@ -263,7 +265,7 @@ class Application(Gtk.Application):
     def init_convert_elements(self):
         self._presets = Presets.get_presets()
         if not self._presets:
-            self._presets = Presets.get_default_presets(UI_RESOURCES_PATH + "presets.json")
+            self._presets = Presets.get_default_presets(PRESETS_PATH)
         list(map(self._category_combo_box.append_text, sorted(self._presets)))
 
     def on_add_files(self, button):
@@ -353,7 +355,7 @@ class Application(Gtk.Application):
     def on_about(self, button):
         builder = Gtk.Builder()
         builder.set_translation_domain(TEXT_DOMAIN)
-        builder.add_objects_from_file(UI_RESOURCES_PATH + "converter.glade", ("about_dialog",))
+        builder.add_objects_from_file(f"{UI_RESOURCES_PATH}converter.glade", ("about_dialog",))
         dialog = builder.get_object("about_dialog")
         dialog.set_transient_for(self._main_window)
         dialog.run()
@@ -566,7 +568,7 @@ class Application(Gtk.Application):
 
         in_path = Path(self._current_crop_file)
         out_path = str(in_path.parent) + os.sep if use_source_folder else base_path + os.sep
-        out_file = "{}{}_CROP.{}".format(out_path, in_path.stem, in_path.suffix)
+        out_file = f"{out_path}{in_path.stem}_CROP.{in_path.suffix}"
 
         st = self.get_time_position(self._crop_start_scale.get_value())
         et = self.get_time_position(self._crop_end_scale.get_value())
@@ -625,7 +627,7 @@ class Application(Gtk.Application):
         self._category_combo_box.remove(self._category_combo_box.get_active())
 
     def on_category_restore_defaults(self, item):
-        self._presets = Presets.get_default_presets(UI_RESOURCES_PATH + "presets.json")
+        self._presets = Presets.get_default_presets(PRESETS_PATH)
         self._category_combo_box.remove_all()
         list(map(self._category_combo_box.append_text, sorted(self._presets)))
         self.show_info_message("Done!", Gtk.MessageType.INFO)
@@ -753,7 +755,7 @@ class Application(Gtk.Application):
                 elif self._duration > 0:
                     d_time = sum((int(d_res.group(2)) * 3600, int(d_res.group(3)) * 60, float(d_res.group(4))))
                     done = d_time * 100 / self._duration
-                    self._files_model.set_value(self._current_itr, Column.PROGRESS, done)
+                    self._files_model.set_value(self._current_itr, Column.PROGRESS, int(done))
                 else:
                     pass  # (NOP) May be error in the duration detection. TODO: Think about processing
 
@@ -799,7 +801,7 @@ class Application(Gtk.Application):
     def get_file_info(path):
         """ Returns file info from the metadata. """
         md = FFmpeg.get_metadata(path)
-        info = ["{}: {}".format(k.replace("_", " ").capitalize(), v) for k, v in md.items() if type(v) is str]
+        info = [f"{k.replace('_', ' ').capitalize()}: {v}" for k, v in md.items() if type(v) is str]
 
         return "\n".join(info)
 

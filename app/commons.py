@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2019-2021 Dmitriy Yefremov
+# Copyright (C) 2019-2023 Dmitriy Yefremov
 #
 # This file is part of FFmpegGTK.
 #
@@ -33,15 +33,15 @@ from xml.dom.minidom import parse, Node
 
 class AppConfig(dict):
     """ Helper class for working with app config. """
-    CONFIG_PATH = str(Path.home()) + "/.config/ffmpeg-gtk/"
-    CONFIG_FILE = CONFIG_PATH + "config.json"
+    CONFIG_PATH = f"{Path.home()}/.config/ffmpeg-gtk/"
+    CONFIG_FILE = f"{CONFIG_PATH}config.json"
     pathlib.Path(CONFIG_PATH).mkdir(parents=True, exist_ok=True)
     pathlib.Path(CONFIG_FILE).touch(exist_ok=True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         if os.path.isfile(AppConfig.CONFIG_FILE) and os.stat(AppConfig.CONFIG_FILE).st_size > 0:
-            with open(AppConfig.CONFIG_PATH + "config.json", "r") as config_file:
+            with open(AppConfig.CONFIG_FILE, "r") as config_file:
                 self.update(json.load(config_file))
 
     def save(self):
