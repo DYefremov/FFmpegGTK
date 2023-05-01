@@ -30,13 +30,11 @@ import subprocess
 import time
 from datetime import timedelta
 from enum import IntEnum, Enum
-from functools import wraps
 from pathlib import Path
-from threading import Thread
+
+from app.commons import Presets, AppConfig, FFmpeg, run_task, run_idle, init_logger, log
 
 import gi
-
-from app.commons import Presets, AppConfig, FFmpeg
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio, GLib, Gdk, GdkPixbuf
@@ -56,7 +54,7 @@ if UI_RESOURCES_PATH == "app/":
     locale.bindtextdomain(TEXT_DOMAIN, LANG_DIR)
 
 
-def get_localized_message(message):
+def translate(message):
     return locale.dgettext(TEXT_DOMAIN, message)
 
 
@@ -73,31 +71,6 @@ class Column(IntEnum):
 class StackTool(Enum):
     CONVERTER = "convert"
     CROP = "crop"
-
-
-def run_task(func):
-    """ Runs function in separate thread """
-
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        task = Thread(target=func, args=args, kwargs=kwargs, daemon=True)
-        task.start()
-
-    return wrapper
-
-
-def run_idle(func):
-    """ Runs a function with a lower priority """
-
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        GLib.idle_add(func, *args, **kwargs)
-
-    return wrapper
-
-
-def init_logger():
-    print("init log test")
 
 
 class Application(Gtk.Application):
@@ -121,7 +94,6 @@ class Application(Gtk.Application):
                     "on_show_output_switch": self.on_show_output_switch,
                     "on_about": self.on_about,
                     "on_exit": self.on_exit,
-                    "on_resize": self.on_resize,
                     "on_crop_start_draw": self.on_crop_start_draw,
                     "on_crop_end_draw": self.on_crop_end_draw,
                     "on_execute": self.on_execute,
@@ -155,11 +127,10 @@ class Application(Gtk.Application):
 
         builder = Gtk.Builder()
         builder.set_translation_domain(TEXT_DOMAIN)
-        builder.add_from_file(UI_RESOURCES_PATH + "converter.glade")
+        builder.add_from_file(f"{UI_RESOURCES_PATH}converter.glade")
         builder.connect_signals(handlers)
 
         self._main_window = builder.get_object("main_window")
-        self._main_window.resize(*self._config.main_window_size)
         self._file_tree_view = builder.get_object("file_tree_view")
         self._files_model = builder.get_object("files_list_store")
         self._details_text_view = builder.get_object("details_text_view")
@@ -176,6 +147,7 @@ class Application(Gtk.Application):
         self._profile_params_entry = builder.get_object("profile_params_entry")
         self._profile_extension_entry = builder.get_object("profile_extension_entry")
         self._output_folder_chooser = builder.get_object("output_folder_chooser")
+        self._use_source_folder_switch = builder.get_object("use_source_folder_switch")
         self._overwrite_if_exists_switch = builder.get_object("overwrite_if_exists_switch")
         self._convert_button = builder.get_object("convert_button")
         self._add_files_button = builder.get_object("add_files_button")
@@ -213,33 +185,26 @@ class Application(Gtk.Application):
         self._profile_combo_box.bind_property("visible", profile_label, "visible")
         self._profile_combo_box.bind_property("visible", category_menu_button, "visible")
         self._profile_combo_box.bind_property("visible", builder.get_object("profile_menu_button"), "visible")
-        # Header bar
-        self._convert_button.bind_property("visible", builder.get_object("cancel_button"), "visible", 4)
-        self._convert_button.bind_property("visible", builder.get_object("options_menu_button"), "sensitive")
-        self._convert_button.bind_property("visible", builder.get_object("add_files_button"), "sensitive")
-        self._convert_button.bind_property("visible", builder.get_object("add_files_main_menu_button"), "sensitive")
-        self._convert_button.bind_property("visible", builder.get_object("remove_popup_item"), "sensitive")
         # Crop
         self._crop_start_scale = builder.get_object("crop_start_scale")
         self._crop_end_scale = builder.get_object("crop_end_scale")
         self._crop_start_area = builder.get_object("crop_start_area")
         self._crop_end_area = builder.get_object("crop_end_area")
         self._crop_box = builder.get_object("crop_box")
-        self._crop_box.bind_property("sensitive", profile_main_box, "visible", 4)
-        self._crop_box.bind_property("sensitive", profile_label, "visible", 4)
-        self._crop_box.bind_property("sensitive", builder.get_object("category_label"), "visible", 4)
-        self._crop_box.bind_property("sensitive", builder.get_object("category_main_box"), "visible", 4)
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
         self.init_convert_elements()
+        self.init_settings()
+
         try:
             subprocess.check_output(["ffprobe", "-help"], stderr=subprocess.STDOUT)
         except FileNotFoundError as e:
-            msg = get_localized_message("Check if FFmpeg is installed!")
+            msg = translate("Check if FFmpeg is installed!")
             self.show_info_message(f"Error. {e} {msg}", Gtk.MessageType.ERROR)
             self._add_files_button.set_sensitive(False)
             self._add_files_main_menu_button.set_sensitive(False)
+            log(e)
 
     def do_activate(self):
         self._main_window.set_application(self)
@@ -247,7 +212,7 @@ class Application(Gtk.Application):
         self._main_window.present()
 
     def do_shutdown(self):
-        """  Performs shutdown tasks """
+        """  Performs shutdown tasks. """
         self._config.save()
         Presets.save(self._presets)
         Gtk.Application.do_shutdown(self)
@@ -261,6 +226,27 @@ class Application(Gtk.Application):
 
         self.activate()
         return 0
+
+    def init_settings(self):
+        self._main_window.resize(*self._config.main_window_size)
+        self._category_combo_box.set_active(self._config.category)
+        self._profile_combo_box.set_active(self._config.profile)
+        self._use_source_folder_switch.set_active(self._config.use_source_folder)
+        self._overwrite_if_exists_switch.set_active(self._config.overwrite_existing)
+
+        if Path(self._config.output_folder).is_dir():
+            self._output_folder_chooser.select_filename(self._config.output_folder)
+
+    def save_settings(self):
+        self._config.main_window_size = self._main_window.get_size()
+        self._config.category = self._category_combo_box.get_active()
+        self._config.profile = self._profile_combo_box.get_active()
+        self._config.use_source_folder = self._use_source_folder_switch.get_active()
+        self._config.overwrite_existing = self._overwrite_if_exists_switch.get_active()
+
+        f_name = self._output_folder_chooser.get_filename()
+        if f_name and Path(f_name).is_dir():
+            self._config.output_folder = f_name
 
     def init_convert_elements(self):
         self._presets = Presets.get_presets()
@@ -365,11 +351,7 @@ class Application(Gtk.Application):
         if self._in_progress and not self.on_cancel():
             return True
 
-        self._main_window.destroy()
-
-    def on_resize(self, window):
-        """ Stores new size properties for app window after resize """
-        self._config.main_window_size = window.get_size()
+        self.save_settings()
 
     def on_execute(self, item):
         self._info_bar.hide()
@@ -454,7 +436,7 @@ class Application(Gtk.Application):
     def on_cancel(self, item=None):
         dialog = Gtk.MessageDialog(self._main_window, True, Gtk.MessageType.QUESTION,
                                    (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK),
-                                   get_localized_message("Are you sure?"))
+                                   translate("Are you sure?"))
         is_ok = dialog.run() == Gtk.ResponseType.OK
         if is_ok:
             self._in_progress = False
@@ -775,7 +757,7 @@ class Application(Gtk.Application):
     def show_info_message(self, text, message_type):
         self._info_bar.set_visible(True)
         self._info_bar.set_message_type(message_type)
-        self._info_bar_message_label.set_text(get_localized_message(text))
+        self._info_bar_message_label.set_text(translate(text))
 
     @run_idle
     def update_active_buttons(self, active):

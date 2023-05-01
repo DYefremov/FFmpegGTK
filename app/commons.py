@@ -26,9 +26,42 @@ import os
 import pathlib
 import subprocess
 from collections import defaultdict
-from functools import lru_cache
+from functools import lru_cache, wraps
 from pathlib import Path
+from threading import Thread
+
 from xml.dom.minidom import parse, Node
+
+from gi.repository import GLib
+
+
+def run_task(func):
+    """ Runs function in separate thread """
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        task = Thread(target=func, args=args, kwargs=kwargs, daemon=True)
+        task.start()
+
+    return wrapper
+
+
+def run_idle(func):
+    """ Runs a function with a lower priority """
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        GLib.idle_add(func, *args, **kwargs)
+
+    return wrapper
+
+
+def init_logger():
+    print("init log test")
+
+
+def log(message):
+    print(message)
 
 
 class AppConfig(dict):
@@ -50,13 +83,51 @@ class AppConfig(dict):
 
     @property
     def main_window_size(self):
-        if "main_window_size" in self:
-            return self["main_window_size"]
-        return 560, 320
+        return self.get("main_window_size", (560, 320))
 
     @main_window_size.setter
     def main_window_size(self, value):
         self["main_window_size"] = value
+
+    @property
+    def category(self):
+        return self.get("category", -1)
+
+    @category.setter
+    def category(self, value):
+        self["category"] = value
+
+    @property
+    def profile(self):
+        return self.get("profile", -1)
+
+    @profile.setter
+    def profile(self, value):
+        self["profile"] = value
+
+    @property
+    def output_folder(self):
+        return self.get("output_folder", "")
+
+    @output_folder.setter
+    def output_folder(self, value):
+        self["output_folder"] = value
+
+    @property
+    def use_source_folder(self):
+        return self.get("use_source_folder", False)
+
+    @use_source_folder.setter
+    def use_source_folder(self, value):
+        self["use_source_folder"] = value
+
+    @property
+    def overwrite_existing(self):
+        return self.get("overwrite_existing", False)
+
+    @overwrite_existing.setter
+    def overwrite_existing(self, value):
+        self["overwrite_existing"] = value
 
 
 class Presets:
@@ -117,7 +188,7 @@ class FFmpeg:
             md = subprocess.check_output(
                 ["ffprobe", "-i", path, "-v", "quiet", "-print_format", "json", "-show_format"])
         except subprocess.CalledProcessError as e:
-            print(e)
+            log(e)
         else:
             return json.loads(str(md, errors="replace")).get("format", {})
         return {}
@@ -128,7 +199,7 @@ class FFmpeg:
             md = subprocess.check_output(["ffmpeg", "-ss", pos, "-i", path, "-v", "quiet", "-frames:v", "1",
                                           "-s", "360x240", "-f", "image2", "pipe: | cat"])
         except subprocess.CalledProcessError as e:
-            print(e)
+            log(e)
         else:
             return md
 
