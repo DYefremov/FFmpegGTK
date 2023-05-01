@@ -3,7 +3,7 @@
 ## Simple GTK+ frontend for [FFmpeg](http://ffmpeg.org/).  
 [<img src="https://user-images.githubusercontent.com/7511379/115370081-63d3e500-a1d1-11eb-91cc-fb1772011de1.png" width="500"/>](https://user-images.githubusercontent.com/7511379/115370081-63d3e500-a1d1-11eb-91cc-fb1772011de1.png)  
 ### Minimum requirements
-**Python >= 3.5.2 and GTK+ >= 3.16 with PyGObject bindings.**                                                           
+**Python >= 3.6 and GTK+ >= 3.22 with PyGObject bindings.**                                                           
 
 ### Launch
 Just download the [archive](https://github.com/DYefremov/FFmpegGTK/archive/refs/heads/master.zip), unpack and launch it with a double click on the FFmpegGTK.desktop file                       
