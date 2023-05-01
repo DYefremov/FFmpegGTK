@@ -1,0 +1,7 @@
+ffmpeg-gtk for Debian
+----------------------
+FFmpegGTK
+Simple GTK+ frontend for FFmpeg.
+
+Minimum requirements:
+    Python >= 3.6, GTK+ >= 3.22, python3-gi, ffmpeg.

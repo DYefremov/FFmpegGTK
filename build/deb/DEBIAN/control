@@ -1,0 +1,12 @@
+Package: ffmpeg-gtk
+Version: 0.1.0-Alpha
+Section: utils
+Priority: optional
+Architecture: all
+Essential: no
+Depends: python3 (>= 3.6),
+         python3-gi,
+         ffmpeg
+Maintainer: <User> <Mail>
+Homepage: https://github.com/DYefremov/FFmpegGTK
+Description: Simple GTK+ frontend for FFmpeg.

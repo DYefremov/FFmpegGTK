@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=FFmpegGTK
+GenericName=Simple GTK+ frontend for FFmpeg.
+Comment[ru]=Простой интерфейс GTK+ для FFmpeg.
+Icon=ffmpeg-gtk
+Exec=/usr/bin/ffmpeg-gtk
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+StartupNotify=false

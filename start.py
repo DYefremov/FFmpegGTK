@@ -8,20 +8,20 @@ from app.converter import Application
 def update_icon():
     need_update = False
 
-    with open("FFmpegGTK.desktop", "r") as f:
+    with open("ffmpeg-gtk.desktop", "r", encoding="utf-8") as f:
         lines = f.readlines()
 
         for i, line in enumerate(lines):
             if line.startswith("Icon="):
                 icon_path = line.lstrip("Icon=")
-                current_path = "{}/app/img/logo.png".format(os.getcwd())
+                current_path = f"{os.getcwd()}/app/img/logo.png"
                 if icon_path != current_path:
                     need_update = True
-                    lines[i] = "Icon={}\n".format(current_path)
+                    lines[i] = f"Icon={current_path}\n"
                 break
 
     if need_update:
-        with open("FFmpegGTK.desktop", "w") as f:
+        with open("ffmpeg-gtk.desktop", "w", encoding="utf-8") as f:
             f.writelines(lines)
 
 

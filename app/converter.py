@@ -39,7 +39,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio, GLib, Gdk, GdkPixbuf
 
-UI_RESOURCES_PATH = "app/" if os.path.exists("app/") else "/usr/share/ffmpeggtk/app/"
+UI_RESOURCES_PATH = "app/" if os.path.exists("app/") else "/usr/share/ffmpeg-gtk/app/"
 
 PRESETS_PATH = f"{UI_RESOURCES_PATH}presets.json"
 
