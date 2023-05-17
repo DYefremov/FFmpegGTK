@@ -39,7 +39,9 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio, GLib, Gdk, GdkPixbuf
 
-UI_RESOURCES_PATH = "app/" if os.path.exists("app/") else "/usr/share/ffmpeg-gtk/app/"
+BASE_UI_PATH = "app/"
+
+UI_RESOURCES_PATH = BASE_UI_PATH if os.path.exists(BASE_UI_PATH) else "/usr/share/ffmpeg-gtk/app/"
 
 PRESETS_PATH = f"{UI_RESOURCES_PATH}presets.json"
 
@@ -209,6 +211,9 @@ class Application(Gtk.Application):
     def do_activate(self):
         self._main_window.set_application(self)
         self._main_window.set_wmclass("FFmpegGTK", "FFmpegGTK")
+        if UI_RESOURCES_PATH != BASE_UI_PATH:
+            self._main_window.set_icon_name("ffmpeg-gtk")
+
         self._main_window.present()
 
     def do_shutdown(self):
@@ -344,6 +349,11 @@ class Application(Gtk.Application):
         builder.add_objects_from_file(f"{UI_RESOURCES_PATH}converter.glade", ("about_dialog",))
         dialog = builder.get_object("about_dialog")
         dialog.set_transient_for(self._main_window)
+
+        if UI_RESOURCES_PATH != BASE_UI_PATH:
+            dialog.set_logo_icon_name("ffmpeg-gtk")
+            dialog.set_icon_name("ffmpeg-gtk")
+
         dialog.run()
         dialog.destroy()
 
