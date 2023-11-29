@@ -397,10 +397,10 @@ class Application(Gtk.Application):
             in_file = row[Column.FILE]
             in_path = Path(in_file)
             out_path = str(in_path.parent) + os.sep if use_source_folder else base_path + os.sep
-            out_file = "{}{}.{}".format(out_path, in_path.stem, extension)
+            out_file = f"{out_path}{in_path.stem}.{extension}"
 
             if in_file == out_file:
-                out_file = "{}CONVERTED!_{}.{}".format(out_path, in_path.stem, extension)
+                out_file = f"{out_path}CONVERTED!_{in_path.stem}.{extension}"
 
             commands.append((["ffmpeg", "-i", in_file, *opts, overwrite, out_file], index))
 
@@ -435,7 +435,7 @@ class Application(Gtk.Application):
                 GLib.idle_add(self._files_model.set_value, itr, Column.IN_PROGRESS, True)
                 GLib.io_add_watch(self._current_process.stderr, GLib.IO_IN, self.write_to_buffer)
                 self._current_process.wait()
-                self._files_model.set_value(itr, Column.SELECTED, False)
+                GLib.idle_add(self._files_model.set_value, itr, Column.SELECTED, False)
         finally:
             self.update_active_buttons(True)
             if self._in_progress:
