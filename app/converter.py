@@ -435,6 +435,7 @@ class Application(Gtk.Application):
                 GLib.idle_add(self._files_model.set_value, itr, Column.IN_PROGRESS, True)
                 GLib.io_add_watch(self._current_process.stderr, GLib.IO_IN, self.write_to_buffer)
                 self._current_process.wait()
+                self._current_process.communicate()  # -> *BSD
                 GLib.idle_add(self._files_model.set_value, itr, Column.SELECTED, False)
         finally:
             self.update_active_buttons(True)
@@ -736,7 +737,7 @@ class Application(Gtk.Application):
         return True
 
     def write_to_buffer(self, fd, condition):
-        if condition == GLib.IO_IN:
+        if condition == GLib.IO_IN and not fd.closed:
             line = fd.readline()
             d_res = re.match(DURATION_PATTERN, line)
             if d_res:
