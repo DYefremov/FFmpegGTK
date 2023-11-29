@@ -746,8 +746,8 @@ class Application(Gtk.Application):
                     self._duration = d_time
                 elif self._duration > 0:
                     d_time = sum((int(d_res.group(2)) * 3600, int(d_res.group(3)) * 60, float(d_res.group(4))))
-                    done = d_time * 100 / self._duration
-                    self._files_model.set_value(self._current_itr, Column.PROGRESS, int(done))
+                    done = int(d_time * 100 / self._duration)
+                    self._files_model.set_value(self._current_itr, Column.PROGRESS, done) if done <= 100 else None
                 else:
                     pass  # (NOP) May be error in the duration detection. TODO: Think about processing
 
