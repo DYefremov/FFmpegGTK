@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 /usr/share/ffmpeg-gtk/start.py $1
+python3 /usr/share/ffmpeg-gtk/convert.py $1

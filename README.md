@@ -7,7 +7,7 @@
 
 ### Launch
 Just download the [archive](https://github.com/DYefremov/FFmpegGTK/archive/refs/heads/master.zip), unpack and launch it with a double click on the FFmpegGTK.desktop file                       
-in the root directory or launch it from the console using the command: ```./start.py```                                 
+in the root directory or launch it from the console using the command: ```./convert.py```                                 
 
 #### Keyboard shortcuts:                                                                                                                
 * **Ctrl + I, Insert** - show dialog for adding files to the list.                                                                         
