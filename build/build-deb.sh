@@ -1,5 +1,5 @@
 #!/bin/bash
-VER="0.1.2_Alpha"
+VER="0.1.3_Alpha"
 B_PATH="dist/FFmpegGTK"
 DEB_PATH="$B_PATH/usr/share/ffmpeg-gtk"
 
