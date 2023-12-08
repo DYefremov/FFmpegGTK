@@ -278,7 +278,7 @@ Author: Dmitriy Yefremov
             <property name="receives-default">True</property>
             <property name="text" translatable="yes">Exit</property>
             <property name="centered">True</property>
-            <signal name="clicked" handler="on_exit" swapped="no"/>
+            <signal name="clicked" handler="on_app_exit" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>

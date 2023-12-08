@@ -96,6 +96,7 @@ class Application(Gtk.Application):
                     "on_show_output_switch": self.on_show_output_switch,
                     "on_about": self.on_about,
                     "on_exit": self.on_exit,
+                    "on_app_exit": self.on_app_exit,
                     "on_crop_start_draw": self.on_crop_start_draw,
                     "on_crop_end_draw": self.on_crop_end_draw,
                     "on_execute": self.on_execute,
@@ -362,6 +363,9 @@ class Application(Gtk.Application):
             return True
 
         self.save_settings()
+
+    def on_app_exit(self, button):
+        self._main_window.close()
 
     def on_execute(self, item):
         self._info_bar.hide()
