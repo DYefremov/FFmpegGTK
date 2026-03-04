@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # FFmpegGTK. Simple GTK+ frontend for FFmpeg.
-# Copyright (C) 2019-2023 Dmitriy Yefremov
+# Copyright (C) 2019-2026 Dmitriy Yefremov
 #
 # This file is part of FFmpegGTK.
 #
@@ -21,12 +21,13 @@
 # Author: Dmitriy Yefremov
 #
 
-
+import gettext
 import locale
 import mimetypes
 import os
 import re
 import subprocess
+import sys
 import time
 from datetime import timedelta
 from enum import IntEnum, Enum
@@ -49,15 +50,18 @@ IS_GNOME_SESSION = int(bool(os.environ.get("GNOME_DESKTOP_SESSION_ID")))
 
 DURATION_PATTERN = re.compile(r"(.*Duration:)?.*(\d{2}):(\d{2}):(\d{2}.\d{2}).*")
 
+IS_LINUX = sys.platform == "linux"
+
 # Translation
 TEXT_DOMAIN = "ffmpeg-gtk"
 if UI_RESOURCES_PATH == "app/":
     LANG_DIR = f"{UI_RESOURCES_PATH}lang"
-    locale.bindtextdomain(TEXT_DOMAIN, LANG_DIR)
+    if IS_LINUX:
+        locale.bindtextdomain(TEXT_DOMAIN, LANG_DIR)
 
 
 def translate(message):
-    return locale.dgettext(TEXT_DOMAIN, message)
+    return gettext.dgettext(TEXT_DOMAIN, message)
 
 
 class Column(IntEnum):

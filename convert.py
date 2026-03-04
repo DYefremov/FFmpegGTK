@@ -24,8 +24,9 @@ def update_icon():
         with open("ffmpeg-gtk.desktop", "w", encoding="utf-8") as f:
             f.writelines(lines)
 
+if sys.platform == "linux":
+    update_icon()
 
-update_icon()
 app = Application()
 app.run(sys.argv)
 
