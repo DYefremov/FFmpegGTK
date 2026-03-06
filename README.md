@@ -1,5 +1,5 @@
 # <img src="https://trac.ffmpeg.org/ffmpeg-logo.png" width="120" />GTK  
-[![License: GPL](https://img.shields.io/badge/license-GPL%33-blue)](LICENSE) ![platform](https://img.shields.io/badge/platform-linux%20-lightgrey)  
+[![License: GPL](https://img.shields.io/badge/license-GPL%33-blue)](LICENSE) ![platform](https://img.shields.io/badge/platform-linux%20|%20macos-lightgrey)  
 ## Simple GTK+ frontend for [FFmpeg](http://ffmpeg.org/).  
 [<img src="https://user-images.githubusercontent.com/7511379/115370081-63d3e500-a1d1-11eb-91cc-fb1772011de1.png" width="500"/>](https://user-images.githubusercontent.com/7511379/115370081-63d3e500-a1d1-11eb-91cc-fb1772011de1.png)  
 ### Minimum requirements
@@ -16,7 +16,6 @@ in the root directory or launch it from the console using the command: ```./conv
 * **Space** - select/deselect.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
 ### Important
-**This software is not fully tested!** Some functions may not work properly.                                     
-The launch of this program was tested only in the latest version of [Linux Mint](https://linuxmint.com/) - MATE (64-bit).                               
+**This software is not fully tested!**.                               
 
 The default presets was taken from [WinFF](https://github.com/WinFF/winff) project.                                     
