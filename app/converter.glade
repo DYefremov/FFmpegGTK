@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.38.2 
 
-Copyright (C) 2019-2023 Dmitriy Yefremov
+Copyright (C) 2019-2026 Dmitriy Yefremov
 
 This file is part of FFmpegGTK.
 
@@ -26,7 +26,7 @@ Author: Dmitriy Yefremov
   <!-- interface-license-type gplv3 -->
   <!-- interface-name FFmpegGTK -->
   <!-- interface-description Very simple GUI frontend for FFmpeg. -->
-  <!-- interface-copyright 2019-2023 Dmitriy Yefremov -->
+  <!-- interface-copyright 2019-2026 Dmitriy Yefremov -->
   <!-- interface-authors Dmitriy Yefremov -->
   <object class="GtkAboutDialog" id="about_dialog">
     <property name="can-focus">False</property>
@@ -37,8 +37,8 @@ Author: Dmitriy Yefremov
     <property name="skip-pager-hint">True</property>
     <property name="gravity">center</property>
     <property name="program-name">FFmpegGTK</property>
-    <property name="version">0.1.4 Alpha</property>
-    <property name="copyright" translatable="yes">2019-2023 Dmitriy Yefremov</property>
+    <property name="version">0.1.5 Beta</property>
+    <property name="copyright" translatable="yes">2019-2026 Dmitriy Yefremov</property>
     <property name="comments" translatable="yes">Simple GTK+ frontend for FFmpeg.</property>
     <property name="authors">Dmitriy Yefremov</property>
     <property name="translator-credits" translatable="yes">translator-credits</property>
